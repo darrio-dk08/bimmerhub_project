@@ -11,6 +11,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("parts/", include("parts.urls")),
     path("", include("core.urls")),
+    path("garage/", include("garage.urls")),
 ]
 
 if settings.DEBUG:

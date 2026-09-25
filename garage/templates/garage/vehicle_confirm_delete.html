@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Vehicle | BimmerHub{% endblock %}
+
+{% block content %}
+<h1>Delete vehicle</h1>
+<p>
+    Are you sure you want to remove <strong>{{ vehicle }}</strong>
+    from your garage? This cannot be undone.
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="garage-actions">
+        <button class="garage-button garage-button-danger" type="submit">
+            Delete vehicle
+        </button>
+        <a class="garage-button garage-button-secondary" href="{% url 'garage:vehicle_list' %}">
+            Cancel
+        </a>
+    </div>
+</form>
+{% endblock %}

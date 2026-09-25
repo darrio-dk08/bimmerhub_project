@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}My Garage | BimmerHub{% endblock %}
+
+{% block content %}
+<h1>My garage</h1>
+<p>Keep your vehicle details together. Only you can view this list.</p>
+
+<a class="garage-button" href="{% url 'garage:vehicle_create' %}">
+    Add a vehicle
+</a>
+
+<div class="garage-grid">
+    {% for vehicle in vehicles %}
+    <article class="garage-card">
+        <h2>{{ vehicle.make }} {{ vehicle.model }}</h2>
+
+        <dl>
+            <dt>Year</dt>
+            <dd>{{ vehicle.year }}</dd>
+
+            <dt>Engine</dt>
+            <dd>{{ vehicle.engine }}</dd>
+
+            <dt>Registration</dt>
+            <dd>{{ vehicle.registration|default:"Not provided" }}</dd>
+        </dl>
+
+        <div class="garage-actions">
+            <a class="garage-button garage-button-secondary" href="{% url 'garage:vehicle_update' vehicle.pk %}"
+                aria-label="Edit {{ vehicle }}">
+                Edit
+            </a>
+
+            <a class="garage-button garage-button-danger-outline" href="{% url 'garage:vehicle_delete' vehicle.pk %}"
+                aria-label="Delete {{ vehicle }}">
+                Delete
+            </a>
+        </div>
+    </article>
+    {% empty %}
+    <p>You haven't added any vehicles yet. Add your first vehicle above.</p>
+    {% endfor %}
+</div>
+{% endblock %}

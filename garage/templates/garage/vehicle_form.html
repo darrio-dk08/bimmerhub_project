@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} | BimmerHub{% endblock %}
+
+{% block content %}
+<h1>{{ page_title }}</h1>
+
+<form class="garage-form" method="post">
+    {% csrf_token %}
+
+    {% if form.errors %}
+    <p role="alert">Please correct the errors below.</p>
+    {% endif %}
+
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+    <div class="garage-field">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.help_text %}
+        <p class="garage-help" id="{{ field.auto_id }}_helptext">
+            {{ field.help_text }}
+        </p>
+        {% endif %}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+
+    <div class="garage-actions">
+        <button class="garage-button" type="submit">Save vehicle</button>
+        <a class="garage-button garage-button-secondary" href="{% url 'garage:vehicle_list' %}">
+            Cancel
+        </a>
+    </div>
+</form>
+{% endblock %}

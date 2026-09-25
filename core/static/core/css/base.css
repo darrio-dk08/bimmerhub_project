@@ -819,3 +819,146 @@ main p {
         padding: 1rem 1.25rem;
     }
 }
+
+/* Personal garage */
+.garage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.garage-card {
+    min-width: 0;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #f7f8fa;
+    overflow-wrap: anywhere;
+}
+
+.garage-card h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.garage-card dt {
+    margin-top: 0.75rem;
+    font-weight: 700;
+}
+
+.garage-card dd {
+    margin: 0;
+}
+
+.garage-form {
+    max-width: 600px;
+}
+
+.garage-field {
+    margin-bottom: 1.25rem;
+}
+
+.garage-field label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+
+.garage-field input {
+    width: 100%;
+    min-height: 46px;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #748296;
+    border-radius: 6px;
+    color: var(--text);
+    background: #ffffff;
+    font: inherit;
+}
+
+.garage-help {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.garage-form .errorlist {
+    color: #a31515;
+}
+
+.garage-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.garage-actions a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.garage-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0.65rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: #174eaa;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.garage-button:hover {
+    background: #123d85;
+}
+
+.garage-button-danger {
+    background: #a31515;
+}
+
+.garage-button-danger:hover {
+    background: #801010;
+}
+
+.garage-field input:focus-visible,
+.garage-button:focus-visible {
+    outline: 3px solid #b45309;
+    outline-offset: 3px;
+}
+
+/* Secondary garage actions */
+.garage-button-secondary {
+    border-color: #748296;
+    background: #ffffff;
+    color: #172335;
+}
+
+.garage-button-secondary:hover {
+    border-color: #174eaa;
+    background: #e8f0fe;
+    color: #123d85;
+}
+
+.garage-button-danger-outline {
+    border-color: #a31515;
+    background: #ffffff;
+    color: #a31515;
+}
+
+.garage-button-danger-outline:hover {
+    background: #a31515;
+    color: #ffffff;
+}
+
+.garage-actions .garage-button {
+    min-width: 100px;
+    min-height: 46px;
+    text-decoration: none;
+}
