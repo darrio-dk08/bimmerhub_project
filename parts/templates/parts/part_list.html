@@ -9,6 +9,37 @@
     Confirm the part number matches your vehicle before purchasing.
 </p>
 
+<form class="catalogue-filters"
+      method="get"
+      action="{% url 'parts:part_list' %}"
+      aria-label="Filter parts catalogue">
+
+    <div class="filter-field">
+        {{ filter_form.q.label_tag }}
+        {{ filter_form.q }}
+        {{ filter_form.q.errors }}
+    </div>
+
+    <div class="filter-field">
+        {{ filter_form.category.label_tag }}
+        {{ filter_form.category }}
+        {{ filter_form.category.errors }}
+    </div>
+
+    <div class="filter-actions">
+        <button type="submit">Search</button>
+        <a href="{% url 'parts:part_list' %}">Clear filters</a>
+    </div>
+</form>
+
+{% if filter_form.errors %}
+<p>Please correct the filters above and search again.</p>
+{% else %}
+<p class="catalogue-result-count">
+    {{ parts|length }} part{{ parts|length|pluralize }} found.
+</p>
+{% endif %}
+
 <div class="product-grid">
     {% for part in parts %}
     <article class="product-card">
@@ -42,7 +73,13 @@
         </div>
     </article>
     {% empty %}
+    {% if filter_form.errors %}
+    <p>Results will appear once the filters are valid.</p>
+    {% elif filters_active %}
+    <p>No parts match your search. Try another term or clear the filters.</p>
+    {% else %}
     <p>No parts are available yet.</p>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
