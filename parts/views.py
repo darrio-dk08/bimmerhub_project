@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from .models import Part
 
@@ -11,4 +11,18 @@ def part_list(request):
         request,
         "parts/part_list.html",
         {"parts": parts},
+    )
+
+
+def part_detail(request, pk):
+    """Display one product or return 404 when it does not exist."""
+    part = get_object_or_404(
+        Part.objects.select_related("category"),
+        pk=pk,
+    )
+
+    return render(
+        request,
+        "parts/part_detail.html",
+        {"part": part},
     )

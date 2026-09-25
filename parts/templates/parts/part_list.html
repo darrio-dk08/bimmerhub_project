@@ -3,48 +3,46 @@
 {% block title %}BMW Parts Catalogue | BimmerHub{% endblock %}
 
 {% block content %}
-    <h1>BMW parts catalogue</h1>
-    <p>
-        Browse our parts and check the listed model compatibility.
-        Confirm the part number matches your vehicle before purchasing.
-    </p>
+<h1>BMW parts catalogue</h1>
+<p>
+    Browse our parts and check the listed model compatibility.
+    Confirm the part number matches your vehicle before purchasing.
+</p>
 
-    <div class="product-grid">
-        {% for part in parts %}
-            <article class="product-card">
-                {% if part.image %}
-                    <img
-                        class="product-image"
-                        src="{{ part.image.url }}"
-                        alt="{{ part.name }}"
-                        loading="lazy"
-                        width="400"
-                        height="300"
-                    >
-                {% else %}
-                    <div class="product-placeholder">
-                        No image available
-                    </div>
-                {% endif %}
+<div class="product-grid">
+    {% for part in parts %}
+    <article class="product-card">
+        {% if part.image %}
+        <img class="product-image" src="{{ part.image.url }}" alt="{{ part.name }}" loading="lazy" width="400"
+            height="300">
+        {% else %}
+        <div class="product-placeholder">
+            No image available
+        </div>
+        {% endif %}
 
-                <div class="product-body">
-                    <p class="product-category">{{ part.category.name }}</p>
-                    <h2>{{ part.name }}</h2>
-                    <p>{{ part.compatible_model }}</p>
-                    <p>Part number: {{ part.part_number }}</p>
-                    <p class="product-price">
-                        &euro;{{ part.price|floatformat:2 }}
-                    </p>
+        <div class="product-body">
+            <p class="product-category">{{ part.category.name }}</p>
+            <h2>
+                <a href="{% url 'parts:part_detail' part.pk %}">
+                    {{ part.name }}
+                </a>
+            </h2>
+            <p>{{ part.compatible_model }}</p>
+            <p>Part number: {{ part.part_number }}</p>
+            <p class="product-price">
+                &euro;{{ part.price|floatformat:2 }}
+            </p>
 
-                    {% if part.stock > 0 %}
-                        <p>In stock</p>
-                    {% else %}
-                        <p>Out of stock</p>
-                    {% endif %}
-                </div>
-            </article>
-        {% empty %}
-            <p>No parts are available yet.</p>
-        {% endfor %}
-    </div>
+            {% if part.stock > 0 %}
+            <p>In stock</p>
+            {% else %}
+            <p>Out of stock</p>
+            {% endif %}
+        </div>
+    </article>
+    {% empty %}
+    <p>No parts are available yet.</p>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -51,7 +51,7 @@ class PartCatalogueTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No parts are available yet.")
-        
+
 
 class PartDetailTests(TestCase):
     """Check individual product pages and catalogue links."""

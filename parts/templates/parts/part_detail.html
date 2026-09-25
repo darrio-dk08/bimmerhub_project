@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ part.name }} | BimmerHub{% endblock %}
+
+{% block content %}
+<p>
+    <a href="{% url 'parts:part_list' %}">Back to parts catalogue</a>
+</p>
+
+<h1>{{ part.name }}</h1>
+
+<div class="product-detail">
+    <div>
+        {% if part.image %}
+        <img class="detail-image" src="{{ part.image.url }}" alt="{{ part.name }}" width="600" height="450">
+        {% else %}
+        <div class="product-placeholder">
+            No image available
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="detail-information">
+        <p class="product-category">{{ part.category.name }}</p>
+        <p class="product-price">
+            &euro;{{ part.price|floatformat:2 }}
+        </p>
+
+        <dl>
+            <dt>Part number</dt>
+            <dd>{{ part.part_number }}</dd>
+
+            <dt>Listed compatibility</dt>
+            <dd>{{ part.compatible_model }}</dd>
+
+            <dt>Availability</dt>
+            <dd>
+                {% if part.stock > 0 %}
+                In stock
+                {% else %}
+                Out of stock
+                {% endif %}
+            </dd>
+        </dl>
+
+        <p>
+            Confirm the part number matches your vehicle
+            before purchasing.
+        </p>
+    </div>
+</div>
+
+<section class="product-description">
+    <h2>Description</h2>
+    {{ part.description|linebreaks }}
+</section>
+{% endblock %}
