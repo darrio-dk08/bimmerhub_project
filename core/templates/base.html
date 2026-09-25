@@ -16,6 +16,7 @@
     <header>
         <nav aria-label="Main navigation">
             <a href="{% url 'core:home' %}">BimmerHub</a>
+            <a href="{% url 'parts:part_list' %}">Parts</a>
 
             {% if user.is_authenticated %}
                 <a href="{% url 'account_logout' %}">Log out</a>
