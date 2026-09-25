@@ -1,21 +1,93 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}BimmerHub | BMW Parts and Your Garage{% endblock %}
+{% block title %}BMW Parts | BimmerHub{% endblock %}
 
 {% block content %}
-    <h1>Welcome to BimmerHub</h1>
-    <p>
-        A BMW parts shop built around your vehicle.
-    </p>
-    <p>
-        Our catalogue and personal garage features are under development.
+<section class="home-hero" aria-labelledby="home-heading">
+    <div class="home-hero-copy">
+        <p class="home-eyebrow">WELCOME TO BIMMERHUB</p>
+
+        <h1 id="home-heading">
+            Your BMW.<br>
+            Your next upgrade.
+        </h1>
+
+        <p class="home-introduction">
+            Find parts for your BMW, explore the details,
+            and check compatibility before you buy.
+        </p>
+
+        <div class="home-actions">
+            <a class="home-button home-button-primary"
+               href="{% url 'parts:part_list' %}">
+                Explore parts
+            </a>
+
+            {% if not user.is_authenticated %}
+            <a class="home-button home-button-secondary"
+               href="{% url 'account_signup' %}">
+                Create an account
+            </a>
+            {% endif %}
+        </div>
+
+        {% if not user.is_authenticated %}
+        <p class="home-login">
+            Already a member?
+            <a href="{% url 'account_login' %}">Log in</a>
+        </p>
+        {% endif %}
+    </div>
+
+    <div class="home-hero-media">
+        <img
+            src="{% static 'core/images/home-hero.jpg' %}"
+            alt=""
+            fetchpriority="high"
+        >
+        <div class="home-image-caption">
+            <span>BUILT AROUND YOUR BMW</span>
+            <p>Find your next project.</p>
+        </div>
+    </div>
+</section>
+
+<section class="home-discover" aria-labelledby="discover-heading">
+    <p class="home-eyebrow">FIND THE RIGHT PART</p>
+    <h2 id="discover-heading">Less searching. More discovering.</h2>
+    <p class="home-section-intro">
+        Explore the catalogue with the information you need
+        to make an informed choice.
     </p>
 
-    {% if not user.is_authenticated %}
-        <p>
-            <a href="{% url 'account_signup' %}">Create an account</a>
-            or
-            <a href="{% url 'account_login' %}">log in</a>.
-        </p>
-    {% endif %}
+    <div class="home-feature-grid">
+        <article class="home-feature">
+            <span class="home-feature-number" aria-hidden="true">01</span>
+            <h3>Search your way</h3>
+            <p>
+                Find parts by name, part number or BMW model,
+                then narrow your results by category.
+            </p>
+        </article>
+
+        <article class="home-feature">
+            <span class="home-feature-number" aria-hidden="true">02</span>
+            <h3>See the details</h3>
+            <p>
+                View product photographs, descriptions,
+                prices and stock availability in one place.
+            </p>
+        </article>
+
+        <article class="home-feature">
+            <span class="home-feature-number" aria-hidden="true">03</span>
+            <h3>Check compatibility</h3>
+            <p>
+                Review the listed model and part number.
+                Confirm they match your vehicle before purchasing.
+            </p>
+        </article>
+    </div>
+</section>
 {% endblock %}
