@@ -1,0 +1,406 @@
+[
+  {
+    "model": "parts.category",
+    "pk": 1,
+    "fields": {
+      "name": "Headligths"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 2,
+    "fields": {
+      "name": "Brakes"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 3,
+    "fields": {
+      "name": "Engine Parts"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 4,
+    "fields": {
+      "name": "Body Parts"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 5,
+    "fields": {
+      "name": "Interior"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 6,
+    "fields": {
+      "name": "Suspension"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 7,
+    "fields": {
+      "name": "Cooling System"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 8,
+    "fields": {
+      "name": "Electrical"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 9,
+    "fields": {
+      "name": "Wheels & Tyres"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 10,
+    "fields": {
+      "name": "Mirrors"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 11,
+    "fields": {
+      "name": "Lighting"
+    }
+  },
+  {
+    "model": "parts.category",
+    "pk": 12,
+    "fields": {
+      "name": "Accessories"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "BMW F10 Driver Side Xenon Headlight",
+      "description": "Genuine-style replacement driver side Xenon headlight designed for the BMW F10 5 Series (2010–2017). Manufactured to OEM specifications, providing excellent visibility, durability, and a precise fit. Ideal for replacing damaged or worn headlights.",
+      "part_number": "F10-HL-001",
+      "compatible_model": "BMW F10 520d (2010–2017)",
+      "price": "325.00",
+      "stock": 4,
+      "image": "media/bimmerhub/parts/product-1_hlo2bq",
+      "created_at": "2026-07-18T13:09:02.256Z",
+      "updated_at": "2026-07-18T13:09:02.256Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "BMW F10 Passenger Side Xenon Headlight",
+      "description": "High-quality passenger side Xenon headlight compatible with BMW F10 models. Designed to restore factory appearance and lighting performance while ensuring easy installation and long-lasting reliability.",
+      "part_number": "F10-HL-002",
+      "compatible_model": "MW F10 520d (2010–2017)",
+      "price": "325.00",
+      "stock": 3,
+      "image": "media/bimmerhub/parts/product-2_zyn1ia",
+      "created_at": "2026-07-18T13:16:07.137Z",
+      "updated_at": "2026-07-18T13:16:07.137Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "name": "Front Brake Disc Set",
+      "description": "Premium ventilated front brake discs engineered for superior stopping performance and heat dissipation. Suitable for everyday driving and long-distance travel while maintaining excellent braking efficiency.",
+      "part_number": "BRK-F10-001",
+      "compatible_model": "BMW F10 520d",
+      "price": "120.00",
+      "stock": 12,
+      "image": "media/bimmerhub/parts/product-3_nqf9fm",
+      "created_at": "2026-07-18T13:28:20.670Z",
+      "updated_at": "2026-07-18T13:28:20.670Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "name": "Rear Pad Kit",
+      "description": "OEM-quality rear brake pad kit offering reliable braking performance, reduced brake dust, and quiet operation. Manufactured for durability and consistent performance under various driving conditions.",
+      "part_number": "BRK-F10-002",
+      "compatible_model": "BMW F10 520d",
+      "price": "65.00",
+      "stock": 18,
+      "image": "media/bimmerhub/parts/product-4_wn0myo",
+      "created_at": "2026-07-18T13:36:14.466Z",
+      "updated_at": "2026-07-18T13:36:14.466Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 5,
+    "fields": {
+      "category": 3,
+      "name": "Oil Filter Kit",
+      "description": "Complete oil filter kit including filter and sealing components. Designed to maintain engine cleanliness, improve lubrication, and extend engine life through efficient filtration.",
+      "part_number": "ENG-F10-00",
+      "compatible_model": "BMW F10 520",
+      "price": "18.99",
+      "stock": 30,
+      "image": "media/bimmerhub/parts/product-5_bcyu3k",
+      "created_at": "2026-07-18T13:45:53.095Z",
+      "updated_at": "2026-07-18T13:45:53.095Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 6,
+    "fields": {
+      "category": 3,
+      "name": "Air Filter",
+      "description": "High-performance replacement air filter that improves airflow while protecting the engine from dust and debris. Helps maintain fuel efficiency and engine performance.",
+      "part_number": "ENG-F10-002",
+      "compatible_model": "BMW F10 520",
+      "price": "24.99",
+      "stock": 20,
+      "image": "media/bimmerhub/parts/product-6_z1dk1f",
+      "created_at": "2026-07-18T13:49:04.164Z",
+      "updated_at": "2026-07-18T13:49:04.164Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 7,
+    "fields": {
+      "category": 3,
+      "name": "Fuel Filter",
+      "description": "Replacement fuel filter designed to remove contaminants from the fuel system, helping improve engine performance and protect fuel injectors from damage.",
+      "part_number": "ENG-F10-003",
+      "compatible_model": "BMW F10 520d",
+      "price": "34.99",
+      "stock": 15,
+      "image": "media/bimmerhub/parts/product-7_xntrjf",
+      "created_at": "2026-07-18T13:52:36.143Z",
+      "updated_at": "2026-07-18T13:52:36.143Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 8,
+    "fields": {
+      "category": 3,
+      "name": "Timing Chain Kit",
+      "description": "Comprehensive timing chain replacement kit suitable for BMW N47 diesel engines. Includes essential components for reliable engine timing and long-term performance.",
+      "part_number": "ENG-F10-004",
+      "compatible_model": "BMW N47 Engine",
+      "price": "289.00",
+      "stock": 5,
+      "image": "media/bimmerhub/parts/product-8_spnyj6",
+      "created_at": "2026-07-18T13:55:19.609Z",
+      "updated_at": "2026-07-18T13:55:19.609Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 9,
+    "fields": {
+      "category": 6,
+      "name": "Front Shock Absorber",
+      "description": "Premium front shock absorber designed to restore ride comfort, improve handling, and provide enhanced vehicle stability. Manufactured for long-lasting durability.",
+      "part_number": "SUS-F10-001",
+      "compatible_model": "BMW F10",
+      "price": "139.00",
+      "stock": 8,
+      "image": "media/bimmerhub/parts/product-9_f1tdji",
+      "created_at": "2026-07-18T13:58:03.782Z",
+      "updated_at": "2026-07-18T13:58:03.782Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 10,
+    "fields": {
+      "category": 6,
+      "name": "Rear Coil Spring",
+      "description": "Heavy-duty rear suspension spring built to restore original ride height and improve driving comfort while maintaining excellent load support.",
+      "part_number": "SUS-F10-002",
+      "compatible_model": "BMW F10",
+      "price": "89.00",
+      "stock": 10,
+      "image": "media/bimmerhub/parts/product-10_zjw4fz",
+      "created_at": "2026-07-18T14:01:23.285Z",
+      "updated_at": "2026-07-18T14:01:23.285Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 11,
+    "fields": {
+      "category": 8,
+      "name": "TMS Headlight Module",
+      "description": "Replacement TMS (Headlight Control Module) responsible for controlling adaptive headlight functions and Xenon lighting systems. Designed for reliable operation and compatibility with BMW F10 models.",
+      "part_number": "ELE-F10-001",
+      "compatible_model": "BMW F10 Xenon",
+      "price": "110.00",
+      "stock": 6,
+      "image": "media/bimmerhub/parts/product-11_notnfd",
+      "created_at": "2026-07-18T14:03:30.002Z",
+      "updated_at": "2026-07-18T14:03:30.002Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 12,
+    "fields": {
+      "category": 8,
+      "name": "Battery IBS Sensor",
+      "description": "Intelligent Battery Sensor (IBS) that monitors battery condition, charging performance, and electrical system efficiency. Helps optimise battery life and vehicle energy management.",
+      "part_number": "ELE-F10-002",
+      "compatible_model": "BMW F10",
+      "price": "59.99",
+      "stock": 9,
+      "image": "media/bimmerhub/parts/product-12_n9irrj",
+      "created_at": "2026-07-18T14:05:29.831Z",
+      "updated_at": "2026-07-18T14:05:29.831Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 13,
+    "fields": {
+      "category": 7,
+      "name": "Radiator",
+      "description": "High-efficiency replacement radiator designed to maintain optimal engine operating temperature. Manufactured from durable materials for reliable cooling performance.",
+      "part_number": "COOL-F10-001",
+      "compatible_model": "BMW F10 520d",
+      "price": "215.00",
+      "stock": 4,
+      "image": "media/bimmerhub/parts/product-13_qz7icu",
+      "created_at": "2026-07-18T14:08:11.936Z",
+      "updated_at": "2026-07-18T14:08:11.937Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 14,
+    "fields": {
+      "category": 7,
+      "name": "Water Pump",
+      "description": "Precision-engineered water pump that ensures continuous coolant circulation throughout the engine. Essential for preventing overheating and maintaining engine reliability.",
+      "part_number": "COOL-F10-002",
+      "compatible_model": "BMW F10 520d",
+      "price": "129.99",
+      "stock": 7,
+      "image": "media/bimmerhub/parts/product-14_zmkth6",
+      "created_at": "2026-07-18T14:10:12.343Z",
+      "updated_at": "2026-07-18T14:10:12.343Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 15,
+    "fields": {
+      "category": 5,
+      "name": "M Sport Steering Wheel",
+      "description": "Genuine-style BMW M Sport steering wheel featuring premium materials, ergonomic grip, and sporty styling to enhance the driving experience and interior appearance.",
+      "part_number": "INT-F10-001",
+      "compatible_model": "BMW F10",
+      "price": "450.00",
+      "stock": 2,
+      "image": "media/bimmerhub/parts/product-15_emymyw",
+      "created_at": "2026-07-18T14:13:06.529Z",
+      "updated_at": "2026-07-18T14:13:06.529Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 16,
+    "fields": {
+      "category": 5,
+      "name": "iDrive Controller",
+      "description": "Replacement BMW iDrive controller compatible with CIC navigation systems. Restores full multimedia and navigation control while maintaining factory functionality.",
+      "part_number": "INT-F10-002",
+      "compatible_model": "BMW F10 CIC",
+      "price": "149.00",
+      "stock": 5,
+      "image": "media/bimmerhub/parts/product-16_cosbpk",
+      "created_at": "2026-07-18T14:15:20.100Z",
+      "updated_at": "2026-07-18T14:15:20.100Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 17,
+    "fields": {
+      "category": 9,
+      "name": "18\" BMW Style 350 Alloy Wheel",
+      "description": "Genuine-style 18-inch alloy wheel featuring the popular BMW Style 350 design. Manufactured for strength, durability, and a premium factory appearance.",
+      "part_number": "WHL-F10-001",
+      "compatible_model": "BMW F10",
+      "price": "180.00",
+      "stock": 12,
+      "image": "media/bimmerhub/parts/product-17_py2xg0",
+      "created_at": "2026-07-18T14:18:01.136Z",
+      "updated_at": "2026-07-18T14:18:01.136Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 18,
+    "fields": {
+      "category": 4,
+      "name": "Front Bumper M Sport",
+      "description": "M Sport front bumper designed to give the BMW F10 a more aggressive and sporty appearance while maintaining factory fitment and compatibility.",
+      "part_number": "BODY-F10-001",
+      "compatible_model": "BMW F10 LCI",
+      "price": "399.00",
+      "stock": 2,
+      "image": "media/bimmerhub/parts/product-18_t0wix0",
+      "created_at": "2026-07-18T14:20:35.549Z",
+      "updated_at": "2026-07-18T14:20:35.549Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 19,
+    "fields": {
+      "category": 10,
+      "name": "Driver Side Wing Mirror",
+      "description": "Complete driver side electric wing mirror with heating functionality. Manufactured to OEM standards for excellent visibility, durability, and straightforward installation.",
+      "part_number": "MIR-F10-001",
+      "compatible_model": "BMW F10",
+      "price": "179.99",
+      "stock": 5,
+      "image": "media/bimmerhub/parts/product-19_qgctqz",
+      "created_at": "2026-07-18T14:23:14.727Z",
+      "updated_at": "2026-07-18T14:23:14.727Z"
+    }
+  },
+  {
+    "model": "parts.part",
+    "pk": 20,
+    "fields": {
+      "category": 11,
+      "name": "LED Angel Eye Module",
+      "description": "High-quality LED Angel Eye module providing bright white daytime running lights and improved visibility. Designed as a direct replacement for factory modules with long service life.",
+      "part_number": "LGT-F10-001",
+      "compatible_model": "BMW F10",
+      "price": "75.00",
+      "stock": 15,
+      "image": "media/bimmerhub/parts/product-20_lgxcut",
+      "created_at": "2026-07-18T14:26:11.572Z",
+      "updated_at": "2026-07-18T14:26:11.572Z"
+    }
+  }
+]
