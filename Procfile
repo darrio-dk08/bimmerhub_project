@@ -1,0 +1,1 @@
+web: gunicorn bimmerhub.wsgi:application --log-file -
