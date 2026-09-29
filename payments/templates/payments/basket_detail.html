@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Your Basket | BimmerHub{% endblock %}
+
+{% block content %}
+<h1>Your basket</h1>
+
+{% if items %}
+<p>
+    Items are not reserved. Prices and availability are checked
+    against the current catalogue.
+</p>
+
+<div class="basket-items">
+    {% for item in items %}
+    <article class="basket-item">
+        <h2>
+            <a href="{% url 'parts:part_detail' item.part.pk %}">
+                {{ item.part.name }}
+            </a>
+        </h2>
+
+        <p>Part number: {{ item.part.part_number }}</p>
+        <p>Unit price: &euro;{{ item.part.price|floatformat:2 }}</p>
+
+        {% if not item.available %}
+        <p class="basket-warning">
+            Your selected quantity is no longer available.
+            Current stock: {{ item.part.stock }}.
+            Reduce the quantity or remove this item.
+        </p>
+        {% endif %}
+
+        <div class="basket-controls">
+            <form class="basket-quantity-form"
+                  method="post"
+                  action="{% url 'payments:basket_update' item.part.pk %}">
+                {% csrf_token %}
+
+                <label for="quantity-{{ item.part.pk }}">
+                    Quantity
+                    <span class="basket-visually-hidden">
+                        for {{ item.part.name }}
+                    </span>
+                </label>
+
+                <input id="quantity-{{ item.part.pk }}"
+                       name="quantity"
+                       type="number"
+                       min="1"
+                       max="999"
+                       value="{{ item.quantity }}"
+                       required>
+
+                <button class="basket-button" type="submit">
+                    Update
+                </button>
+            </form>
+
+            <form method="post"
+                  action="{% url 'payments:basket_remove' item.part.pk %}">
+                {% csrf_token %}
+                <button class="basket-button basket-button-remove"
+                        type="submit"
+                        aria-label="Remove {{ item.part.name }} from basket">
+                    Remove
+                </button>
+            </form>
+        </div>
+
+        <p class="basket-subtotal">
+            Subtotal: &euro;{{ item.subtotal|floatformat:2 }}
+        </p>
+    </article>
+    {% endfor %}
+</div>
+
+<p class="basket-total">
+    Items total: &euro;{{ total|floatformat:2 }}
+</p>
+{% else %}
+<p>Your basket is empty.</p>
+{% endif %}
+
+<a href="{% url 'parts:part_list' %}">Continue browsing parts</a>
+{% endblock %}

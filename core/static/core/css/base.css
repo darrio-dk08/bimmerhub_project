@@ -962,3 +962,113 @@ main p {
     min-height: 46px;
     text-decoration: none;
 }
+
+/* Shopping basket */
+.basket-items {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.basket-item {
+    min-width: 0;
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #f7f8fa;
+    overflow-wrap: anywhere;
+}
+
+.basket-item h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.basket-controls,
+.basket-quantity-form,
+.basket-add-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.basket-controls form {
+    margin: 0;
+}
+
+.basket-add-form {
+    margin-top: 1.5rem;
+}
+
+.basket-quantity-form input,
+.basket-add-form input {
+    width: 5.5rem;
+    min-height: 46px;
+    padding: 0.6rem;
+    border: 1px solid #748296;
+    border-radius: 6px;
+    background: #ffffff;
+    color: var(--text);
+    font: inherit;
+}
+
+.basket-button {
+    min-height: 46px;
+    padding: 0.65rem 1rem;
+    border: 1px solid #174eaa;
+    border-radius: 8px;
+    background: #174eaa;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.basket-button:hover {
+    background: #123d85;
+}
+
+.basket-button-remove {
+    border-color: #a31515;
+    background: #ffffff;
+    color: #a31515;
+}
+
+.basket-button-remove:hover {
+    background: #a31515;
+    color: #ffffff;
+}
+
+.basket-button:focus-visible,
+.basket-quantity-form input:focus-visible,
+.basket-add-form input:focus-visible {
+    outline: 3px solid #b45309;
+    outline-offset: 3px;
+}
+
+.basket-warning {
+    color: #a31515;
+    font-weight: 700;
+}
+
+.basket-subtotal {
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.basket-total {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.basket-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

@@ -47,6 +47,30 @@
             Confirm the part number matches your vehicle
             before purchasing.
         </p>
+
+                {% if part.stock > 0 %}
+        <form class="basket-add-form"
+              method="post"
+              action="{% url 'payments:basket_add' part.pk %}">
+            {% csrf_token %}
+
+            <label for="add-quantity">Quantity</label>
+            <input id="add-quantity"
+                   name="quantity"
+                   type="number"
+                   min="1"
+                   max="{{ part.stock }}"
+                   value="1"
+                   required>
+
+            <button class="basket-button" type="submit">
+                Add to basket
+            </button>
+        </form>
+        {% else %}
+        <p>This part is currently unavailable to add to your basket.</p>
+        {% endif %}
+
     </div>
 </div>
 
