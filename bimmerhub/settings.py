@@ -250,3 +250,6 @@ if IS_PRODUCTION:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+# Fixed delivery charge per order within Ireland, in euros.
+DELIVERY_CHARGE = "30.00"

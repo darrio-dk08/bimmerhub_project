@@ -37,7 +37,17 @@ class Order(models.Model):
     postal_code = models.CharField(max_length=20, blank=True)
     country = models.CharField(max_length=2)
 
-    currency = models.CharField(max_length=3, default="eur", editable=False)
+    currency = models.CharField(
+        max_length=3,
+        default="eur",
+        editable=False,
+    )
+    delivery_cost = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=Decimal("0.00"),
+        validators=[MinValueValidator(Decimal("0.00"))],
+    )
     total = models.DecimalField(
         max_digits=12,
         decimal_places=2,
@@ -60,7 +70,20 @@ class Order(models.Model):
                 condition=models.Q(total__gte=0),
                 name="order_total_nonnegative",
             ),
+            models.CheckConstraint(
+                condition=models.Q(delivery_cost__gte=0),
+                name="order_delivery_nonnegative",
+            ),
+            models.CheckConstraint(
+                condition=models.Q(total__gte=models.F("delivery_cost")),
+                name="order_total_covers_delivery",
+            ),
         ]
+
+    @property
+    def items_subtotal(self):
+        """Return the saved order total excluding delivery."""
+        return self.total - self.delivery_cost
 
     def __str__(self):
         return str(self.reference)

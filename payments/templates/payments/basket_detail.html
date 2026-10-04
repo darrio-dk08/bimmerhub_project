@@ -75,9 +75,15 @@
     {% endfor %}
 </div>
 
-<p class="basket-total">
-    Items total: &euro;{{ total|floatformat:2 }}
-</p>
+<div class="basket-summary">
+    <p>Items subtotal: &euro;{{ total|floatformat:2 }}</p>
+    <p>Delivery within Ireland: &euro;{{ delivery_cost|floatformat:2 }}</p>
+    <p class="basket-total">
+        Order total: &euro;{{ grand_total|floatformat:2 }}
+    </p>
+    <p>Delivery is available within Ireland only.</p>
+</div>
+
 <a class="basket-button basket-browse"
    href="{% url 'parts:part_list' %}">
     Continue browsing parts

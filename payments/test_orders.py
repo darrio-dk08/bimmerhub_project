@@ -119,3 +119,31 @@ class OrderModelTests(TestCase):
         self.item.refresh_from_db()
         self.assertEqual(self.item.quantity, 2)
         self.assertEqual(self.item.unit_price, Decimal("24.99"))
+
+    def test_order_total_includes_saved_delivery(self):
+        self.order.delivery_cost = Decimal("30.00")
+        self.order.total = Decimal("79.98")
+        self.order.save()
+        self.order.refresh_from_db()
+
+        self.assertEqual(self.order.items_subtotal, Decimal("49.98"))
+        self.assertEqual(self.order.delivery_cost, Decimal("30.00"))
+        self.assertEqual(self.order.total, Decimal("79.98"))
+
+    def test_database_rejects_invalid_delivery_cost(self):
+        invalid_costs = [
+            Decimal("-0.01"),
+            Decimal("50.00"),
+        ]
+
+        # This test order has a total of 49.98.
+        for cost in invalid_costs:
+            with self.subTest(delivery_cost=cost):
+                with self.assertRaises(IntegrityError):
+                    with transaction.atomic():
+                        Order.objects.filter(pk=self.order.pk).update(
+                            delivery_cost=cost,
+                        )
+
+        self.order.refresh_from_db()
+        self.assertEqual(self.order.delivery_cost, Decimal("0.00"))
