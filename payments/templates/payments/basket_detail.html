@@ -3,9 +3,9 @@
 {% block title %}Your Basket | BimmerHub{% endblock %}
 
 {% block content %}
+{% if items %}
 <h1>Your basket</h1>
 
-{% if items %}
 <p>
     Items are not reserved. Prices and availability are checked
     against the current catalogue.
@@ -78,9 +78,31 @@
 <p class="basket-total">
     Items total: &euro;{{ total|floatformat:2 }}
 </p>
-{% else %}
-<p>Your basket is empty.</p>
-{% endif %}
+<a class="basket-button basket-browse"
+   href="{% url 'parts:part_list' %}">
+    Continue browsing parts
+</a>
 
-<a href="{% url 'parts:part_list' %}">Continue browsing parts</a>
+{% else %}
+<section class="basket-empty" aria-labelledby="basket-empty-title">
+    <div class="basket-empty-icon" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round"
+             focusable="false">
+            <path d="M8 3 4 9M16 3l4 6"/>
+            <path d="M2 9h20l-3 12H5L2 9Z"/>
+            <path d="M9 13v4M15 13v4M4 15h16"/>
+        </svg>
+    </div>
+
+    <h1 id="basket-empty-title">Your basket is empty.</h1>
+    <p>Find the right parts for your BMW.</p>
+
+    <a class="basket-button basket-browse"
+       href="{% url 'parts:part_list' %}">
+        Browse parts
+    </a>
+</section>
+{% endif %}
 {% endblock %}
