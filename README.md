@@ -16,11 +16,14 @@ Test counts refer to the stage when each issue was resolved.
 | Live admin login returned a CSRF 403 response. | The exact cause was not confirmed. A stale form or browser cookie was suspected. | Retried login in a fresh private browsing session without disabling CSRF protection. | Login succeeded and the Django administration dashboard appeared. |
 | Three basket tests failed with a missing `DELIVERY_CHARGE` setting. | The active local settings did not expose the delivery-charge setting. | Ensured `DELIVERY_CHARGE = "30.00"` was saved at module level, outside the production-only block. | The Django shell reported `30.00`; all 52 tests passed and `git diff --check` reported no whitespace errors. |
 
+| Checkout did not clear outdated basket entries when every product had been deleted. | The empty-basket check ran before deleted-product cleanup. | Moved deleted-product cleanup before the empty-basket check. | The regression test passed; all 67 tests passed. |
+
 Some initial failing tests were written before their corresponding features
 were implemented. These are distinguished from regressions and configuration
 errors in the descriptions above.
 
 ### Remaining work
 
-Checkout and Stripe test payments are not yet implemented. Passing the
-current tests does not verify those unfinished features.
+The checkout address and order-review pages are implemented. Order creation
+and Stripe test payments are not yet implemented. All 67 current automated
+tests pass; this does not verify the unfinished payment features.

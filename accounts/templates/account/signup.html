@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Create an account | BimmerHub{% endblock %}
+
+{% block content %}
+<section class="auth-card" aria-labelledby="auth-heading">
+    <p class="auth-eyebrow">Join BimmerHub</p>
+    <h1 id="auth-heading">Create your account</h1>
+    <p class="auth-intro">
+        Keep your vehicle details together in your personal garage.
+    </p>
+
+    <form method="post" action="{% url 'account_signup' %}" class="auth-form">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        {% if redirect_field_value %}
+        <input type="hidden"
+               name="{{ redirect_field_name }}"
+               value="{{ redirect_field_value }}">
+        {% endif %}
+
+        <button class="auth-button" type="submit">
+            Create account
+        </button>
+    </form>
+
+    <p class="auth-alternative">
+        Already have an account?
+        <a href="{{ login_url }}">Log in</a>
+    </p>
+</section>
+{% endblock %}

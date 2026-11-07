@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Review order | BimmerHub{% endblock %}
+
+{% block content %}
+<h1>Review your order</h1>
+
+<p role="status">
+    Your delivery details have been checked.
+    No order has been placed and no payment has been taken.
+</p>
+
+<div class="checkout-layout">
+    <section aria-labelledby="delivery-heading">
+        <h2 id="delivery-heading">Delivery address</h2>
+
+        <address class="checkout-address">
+            {{ delivery_details.full_name }}<br>
+            {{ delivery_details.address_line1 }}<br>
+
+            {% if delivery_details.address_line2 %}
+                {{ delivery_details.address_line2 }}<br>
+            {% endif %}
+
+            {{ delivery_details.town_or_city }}<br>
+
+            {% if delivery_details.county %}
+                {{ delivery_details.county }}<br>
+            {% endif %}
+
+            {% if delivery_details.postal_code %}
+                {{ delivery_details.postal_code }}<br>
+            {% endif %}
+
+            Ireland
+        </address>
+
+        <p>
+            Email: {{ delivery_details.email }}<br>
+            Phone: {{ delivery_details.phone }}
+        </p>
+
+        <p>Online payment is not available yet.</p>
+
+        <details>
+            <summary>Edit delivery details</summary>
+
+            <form method="post" class="checkout-form">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="checkout-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.help_text %}
+                    <p class="checkout-help" id="{{ field.auto_id }}_helptext">
+                        {{ field.help_text }}
+                    </p>
+                    {% endif %}
+
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+
+                <button class="basket-button" type="submit">
+                    Update review
+                </button>
+            </form>
+        </details>
+
+        <p>
+            <a href="{% url 'payments:basket_detail' %}">
+                Back to basket
+            </a>
+        </p>
+    </section>
+
+    {% include "payments/includes/order_summary.html" %}
+</div>
+{% endblock %}

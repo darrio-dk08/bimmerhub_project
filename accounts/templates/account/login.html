@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Log in | BimmerHub{% endblock %}
+
+{% block content %}
+<section class="auth-card" aria-labelledby="auth-heading">
+    <p class="auth-eyebrow">Your BimmerHub account</p>
+    <h1 id="auth-heading">Welcome back</h1>
+    <p class="auth-intro">
+        Log in to manage your garage and continue to checkout.
+    </p>
+
+    <form method="post" action="{% url 'account_login' %}" class="auth-form">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        {% if redirect_field_value %}
+        <input type="hidden"
+               name="{{ redirect_field_name }}"
+               value="{{ redirect_field_value }}">
+        {% endif %}
+
+        <button class="auth-button" type="submit">Log in</button>
+    </form>
+
+    <p class="auth-alternative">
+        New to BimmerHub?
+        <a href="{{ signup_url }}">Create an account</a>
+    </p>
+</section>
+{% endblock %}

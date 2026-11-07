@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}BimmerHub{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'core/css/base.css' %}?v=11">
+    <link rel="stylesheet" href="{% static 'core/css/base.css' %}?v=14">
     <link rel="icon" type="image/svg+xml" href="{% static 'core/images/favicon.svg' %}">
 </head>
 
@@ -91,16 +91,55 @@
                 </p>
             </div>
 
-            <nav class="social-links" aria-label="Social media">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
-                   aria-label="Facebook (opens in a new tab)">Facebook</a>
-                <a href="https://x.com/" target="_blank" rel="noopener noreferrer"
-                   aria-label="X (opens in a new tab)">X</a>
-                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
-                   aria-label="YouTube (opens in a new tab)">YouTube</a>
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
-                   aria-label="Instagram (opens in a new tab)">Instagram</a>
-            </nav>
+          <nav class="social-links" aria-label="Social media">
+    <a href="https://www.facebook.com/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Facebook (opens in a new tab)"
+       title="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.972h-1.513c-1.49 0-1.956.931-1.956 1.887v2.262h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073Z"/>
+        </svg>
+    </a>
+
+    <a href="https://x.com/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="X (opens in a new tab)"
+       title="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z"/>
+        </svg>
+    </a>
+
+    <a href="https://www.youtube.com/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="YouTube (opens in a new tab)"
+       title="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.017 3.017 0 0 0 2.121 2.136c1.872.505 9.377.505 9.377.505s7.505 0 9.376-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z"/>
+        </svg>
+    </a>
+
+    <a href="https://www.instagram.com/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Instagram (opens in a new tab)"
+       title="Instagram">
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             aria-hidden="true"
+             focusable="false">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1"
+                    fill="currentColor" stroke="none"/>
+        </svg>
+    </a>
+</nav>
         </div>
     </footer>
 

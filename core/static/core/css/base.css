@@ -1234,3 +1234,351 @@ main p {
         min-width: 0;
     }
 }
+
+/* Checkout address and order review */
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.checkout-layout > * {
+    min-width: 0;
+}
+
+.checkout-field {
+    margin-bottom: 1rem;
+}
+
+.checkout-field label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 700;
+}
+
+.checkout-field input,
+.checkout-field select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0.7rem;
+    border: 1px solid #8995a5;
+    border-radius: 8px;
+    background: #fff;
+    color: #172335;
+    font: inherit;
+}
+
+.checkout-field input:focus-visible,
+.checkout-field select:focus-visible,
+.checkout-actions a:focus-visible,
+.checkout-layout summary:focus-visible {
+    outline: 3px solid #174eaa;
+    outline-offset: 3px;
+}
+
+.checkout-help {
+    margin: 0.35rem 0 0;
+    color: #526174;
+    font-size: 0.95rem;
+}
+
+.checkout-errors,
+.checkout-field .errorlist {
+    color: #a11919;
+}
+
+.checkout-errors {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #a11919;
+    border-radius: 8px;
+    background: #fff4f4;
+}
+
+.checkout-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checkout-summary {
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border: 1px solid #dce3ec;
+    border-radius: 12px;
+    background: #f5f7fa;
+    overflow-wrap: anywhere;
+}
+
+.checkout-summary h2 {
+    margin-top: 0;
+}
+
+.checkout-items {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.checkout-items li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #dce3ec;
+}
+
+.checkout-items p {
+    margin: 0.35rem 0 0;
+}
+
+.checkout-totals > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 1rem;
+}
+
+.checkout-totals dd {
+    margin: 0;
+    font-weight: 700;
+}
+
+.checkout-grand-total {
+    padding-top: 1rem;
+    border-top: 1px solid #dce3ec;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.checkout-address {
+    font-style: normal;
+    overflow-wrap: anywhere;
+}
+
+.checkout-layout summary {
+    padding: 0.75rem 0;
+    color: #174eaa;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .checkout-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Account login, registration and logout */
+
+.auth-card {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    border: 1px solid #dce3ec;
+    border-top: 4px solid #174eaa;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 28px rgb(18 32 51 / 8%);
+    overflow-wrap: anywhere;
+}
+
+.auth-eyebrow {
+    margin: 0 0 0.5rem;
+    color: #174eaa;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.auth-card h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    line-height: 1.2;
+}
+
+.auth-intro {
+    margin-bottom: 1.75rem;
+    color: #526174;
+}
+
+.auth-form > p {
+    margin: 0 0 1.25rem;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+
+.auth-form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.auth-form select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0.75rem;
+    border: 1px solid #8995a5;
+    border-radius: 8px;
+    background: #fff;
+    color: #172335;
+    font: inherit;
+}
+
+.auth-form input[type="checkbox"],
+.auth-form input[type="radio"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: #174eaa;
+    vertical-align: middle;
+}
+
+.auth-form label[for="id_remember"] {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.auth-form .helptext {
+    display: block;
+    margin-top: 0.5rem;
+    color: #526174;
+    font-size: 0.9rem;
+}
+
+.auth-form ul {
+    padding-left: 1.25rem;
+}
+
+.auth-form .errorlist {
+    padding: 0.75rem 0.75rem 0.75rem 2rem;
+    border-left: 3px solid #a11919;
+    border-radius: 6px;
+    background: #fff4f4;
+    color: #a11919;
+}
+
+.auth-card a:not(.auth-button) {
+    color: #174eaa;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.auth-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid #174eaa;
+    border-radius: 8px;
+    background: #174eaa;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background: #103b83;
+    border-color: #103b83;
+    color: #fff;
+}
+
+.auth-button-secondary {
+    background: #fff;
+    color: #174eaa;
+}
+
+.auth-button-secondary:hover {
+    background: #edf3fc;
+    color: #103b83;
+}
+
+.auth-card input:focus-visible,
+.auth-card select:focus-visible,
+.auth-card button:focus-visible,
+.auth-card a:focus-visible {
+    outline: 3px solid #174eaa;
+    outline-offset: 3px;
+}
+
+.auth-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.auth-actions > * {
+    flex: 1 1 160px;
+}
+
+.auth-alternative {
+    margin: 1.5rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid #dce3ec;
+    text-align: center;
+}
+
+/* Footer social icons */
+
+.site-footer .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.site-footer .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid #66788f;
+    border-radius: 50%;
+    background: #1b2d44;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.site-footer .social-links svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+.site-footer .social-links svg:not([fill="none"]) {
+    fill: currentColor;
+}
+
+.site-footer .social-links a:hover {
+    background: #174eaa;
+    border-color: #a8c7ff;
+    color: #fff;
+}
+
+.site-footer .social-links a:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-footer .social-links a {
+        transition: none;
+    }
+}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Log out | BimmerHub{% endblock %}
+
+{% block content %}
+<section class="auth-card" aria-labelledby="auth-heading">
+    <p class="auth-eyebrow">Your BimmerHub account</p>
+    <h1 id="auth-heading">Ready to log out?</h1>
+    <p class="auth-intro">
+        You can log back in whenever you need your garage.
+    </p>
+
+    <form method="post" action="{% url 'account_logout' %}" class="auth-form">
+        {% csrf_token %}
+
+        {% if redirect_field_value %}
+        <input type="hidden"
+               name="{{ redirect_field_name }}"
+               value="{{ redirect_field_value }}">
+        {% endif %}
+
+        <div class="auth-actions">
+            <button class="auth-button" type="submit">Log out</button>
+            <a class="auth-button auth-button-secondary"
+               href="{% url 'core:home' %}">
+                Cancel
+            </a>
+        </div>
+    </form>
+</section>
+{% endblock %}

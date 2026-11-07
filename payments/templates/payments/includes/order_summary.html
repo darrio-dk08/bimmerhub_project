@@ -1,0 +1,37 @@
+<section class="checkout-summary" aria-labelledby="order-summary-title">
+    <h2 id="order-summary-title">Order summary</h2>
+
+    <ul class="checkout-items">
+        {% for item in items %}
+        <li>
+            <div>
+                <a href="{% url 'parts:part_detail' item.part.pk %}">
+                    {{ item.part.name }}
+                </a>
+                <p>
+                    Quantity: {{ item.quantity }}
+                    &times; &euro;{{ item.part.price|floatformat:2 }}
+                </p>
+            </div>
+            <strong>&euro;{{ item.subtotal|floatformat:2 }}</strong>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <dl class="checkout-totals">
+        <div>
+            <dt>Items subtotal</dt>
+            <dd>&euro;{{ total|floatformat:2 }}</dd>
+        </div>
+        <div>
+            <dt>Delivery within Ireland</dt>
+            <dd>&euro;{{ delivery_cost|floatformat:2 }}</dd>
+        </div>
+        <div class="checkout-grand-total">
+            <dt>Order total</dt>
+            <dd>&euro;{{ grand_total|floatformat:2 }}</dd>
+        </div>
+    </dl>
+
+    <p>Stock is not reserved until your order is confirmed.</p>
+</section>

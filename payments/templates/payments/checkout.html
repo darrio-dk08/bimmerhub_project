@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout | BimmerHub{% endblock %}
+
+{% block content %}
+<h1>Checkout</h1>
+<p>Delivery within Ireland costs &euro;30 per order.</p>
+
+<div class="checkout-layout">
+    <section aria-labelledby="delivery-heading">
+        <h2 id="delivery-heading">Your delivery details</h2>
+
+        <form method="post" class="checkout-form">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <div class="checkout-errors" role="alert">
+                Please correct the highlighted fields below.
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            {% for field in form %}
+            <div class="checkout-field">
+                {{ field.label_tag }}
+                {{ field }}
+
+                {% if field.help_text %}
+                <p class="checkout-help" id="{{ field.auto_id }}_helptext">
+                    {{ field.help_text }}
+                </p>
+                {% endif %}
+
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+
+            <div class="checkout-actions">
+                <button class="basket-button" type="submit">
+                    Review order
+                </button>
+                <a href="{% url 'payments:basket_detail' %}">
+                    Back to basket
+                </a>
+            </div>
+        </form>
+    </section>
+
+    {% include "payments/includes/order_summary.html" %}
+</div>
+{% endblock %}
