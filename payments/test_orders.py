@@ -147,3 +147,39 @@ class OrderModelTests(TestCase):
 
         self.order.refresh_from_db()
         self.assertEqual(self.order.delivery_cost, Decimal("0.00"))
+
+    def test_new_order_has_no_stripe_identifiers(self):
+        self.assertIsNone(self.order.stripe_checkout_session_id)
+        self.assertIsNone(self.order.stripe_payment_intent_id)
+
+    def test_stripe_identifiers_cannot_be_shared_between_orders(self):
+        other_order = Order.objects.create(
+            user=self.user,
+            full_name="Another Customer",
+            email="another@example.com",
+            phone="0871234567",
+            address_line1="2 Test Street",
+            town_or_city="Donegal",
+            country="IE",
+            total=Decimal("49.98"),
+        )
+
+        identifiers = {
+            "stripe_checkout_session_id": "cs_test_unique_order",
+            "stripe_payment_intent_id": "pi_unique_order",
+        }
+
+        for field, value in identifiers.items():
+            with self.subTest(field=field):
+                Order.objects.filter(pk=self.order.pk).update(
+                    **{field: value},
+                )
+
+                with self.assertRaises(IntegrityError):
+                    with transaction.atomic():
+                        Order.objects.filter(pk=other_order.pk).update(
+                            **{field: value},
+                        )
+
+                other_order.refresh_from_db()
+                self.assertIsNone(getattr(other_order, field))

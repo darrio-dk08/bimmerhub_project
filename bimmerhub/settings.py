@@ -253,3 +253,6 @@ if IS_PRODUCTION:
 
 # Fixed delivery charge per order within Ireland, in euros.
 DELIVERY_CHARGE = "30.00"
+
+# Stripe sandbox payment configuration
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "").strip()
