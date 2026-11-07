@@ -78,6 +78,17 @@ class Order(models.Model):
         editable=False,
     )
 
+    checkout_token = models.UUIDField(
+        unique=True,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+    stock_reserved = models.BooleanField(
+        default=False,
+        editable=False,
+    )
+
     class Meta:
         ordering = ["-created_at", "-pk"]
         constraints = [
