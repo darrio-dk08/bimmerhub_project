@@ -180,9 +180,7 @@ def get_checkout_url(*, user, order_id):
         if session_id:
             session = client.v1.checkout.sessions.retrieve(session_id)
         else:
-            # The fixed expiry must still be over 30 minutes away for
-            # a new session. Stop automatic creation retries after
-            # 25 minutes, leaving a small timing margin.
+            # Stop creation retries after 25 minutes.
             retry_deadline = request_data["expires_at"] - 2100
 
             if timezone.now().timestamp() >= retry_deadline:
@@ -198,7 +196,7 @@ def get_checkout_url(*, user, order_id):
     except stripe.StripeError as error:
         # A timeout does not prove that Stripe created nothing.
         # Preserve the request and reservation for a safe retry.
-                raise CheckoutError(
+        raise CheckoutError(
             "Stripe could not confirm the payment session. "
             "Please retry this same order."
         ) from error
