@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Payment status | BimmerHub{% endblock %}
+
+{% block content %}
+<section class="auth-card" aria-labelledby="payment-heading">
+    {% if order.status == "paid" %}
+        <h1 id="payment-heading">Payment confirmed</h1>
+        <p>Thank you. Your payment has been verified.</p>
+
+    {% elif order.status == "cancelled" %}
+        <h1 id="payment-heading">Order cancelled</h1>
+        <p>This order is closed. You can return to your basket.</p>
+
+    {% else %}
+        {% if returned_from_cancel %}
+            <h1 id="payment-heading">You returned from payment</h1>
+            <p>
+                Returning to BimmerHub does not immediately cancel
+                your payment session.
+            </p>
+        {% else %}
+            <h1 id="payment-heading">Payment confirmation pending</h1>
+        {% endif %}
+
+        <p>
+            We have not yet confirmed payment for this order.
+            Please check its status again before starting another payment.
+        </p>
+
+        {% if order.stock_reserved %}
+            <p>
+                Your items remain reserved while this payment
+                attempt is being resolved.
+            </p>
+        {% endif %}
+    {% endif %}
+
+    <p>Order reference: {{ order.reference }}</p>
+
+    <dl class="checkout-totals">
+        <div>
+            <dt>Items subtotal</dt>
+            <dd>&euro;{{ order.items_subtotal|floatformat:2 }}</dd>
+        </div>
+        <div>
+            <dt>Delivery within Ireland</dt>
+            <dd>&euro;{{ order.delivery_cost|floatformat:2 }}</dd>
+        </div>
+        <div class="checkout-grand-total">
+            <dt>Order total</dt>
+            <dd>&euro;{{ order.total|floatformat:2 }}</dd>
+        </div>
+    </dl>
+
+    {% if order.status == "pending" %}
+        <p>
+            <a class="auth-button"
+               href="{% url 'payments:payment_success' reference=order.reference %}">
+                Check payment status
+            </a>
+        </p>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'payments:basket_detail' %}">Back to basket</a>
+    </p>
+</section>
+{% endblock %}
