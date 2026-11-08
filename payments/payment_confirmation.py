@@ -7,6 +7,7 @@ from django.utils import timezone
 from .models import Order
 from .services import CheckoutError
 from .stripe_checkout import _validate_session
+from .stripe_data import stripe_to_dict
 
 
 def confirm_order_payment(*, order_id):
@@ -27,6 +28,7 @@ def confirm_order_payment(*, order_id):
     # Retrieve payment information before locking the database row.
     try:
         session = client.v1.checkout.sessions.retrieve(session_id)
+        session = stripe_to_dict(session)
     except stripe.StripeError as error:
         raise CheckoutError(
             "Stripe could not verify this payment. Please retry."

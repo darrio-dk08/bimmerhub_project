@@ -8,6 +8,7 @@ from parts.models import Part
 
 from .models import Order
 from .services import CheckoutError
+from .stripe_data import stripe_to_dict
 
 
 def release_expired_reservation(*, order_id):
@@ -40,6 +41,7 @@ def release_expired_reservation(*, order_id):
     # Keep the network request outside the database transaction.
     try:
         session = client.v1.checkout.sessions.retrieve(session_id)
+        session = stripe_to_dict(session)
     except stripe.StripeError as error:
         raise CheckoutError(
             "Stripe could not verify the payment session. "

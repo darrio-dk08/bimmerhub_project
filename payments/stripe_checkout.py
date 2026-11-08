@@ -9,6 +9,7 @@ from django.utils import timezone
 
 from .models import Order
 from .services import CheckoutError
+from .stripe_data import stripe_to_dict
 
 
 def _to_cents(amount):
@@ -197,10 +198,12 @@ def get_checkout_url(*, user, order_id):
     except stripe.StripeError as error:
         # A timeout does not prove that Stripe created nothing.
         # Preserve the request and reservation for a safe retry.
-        raise CheckoutError(
+                raise CheckoutError(
             "Stripe could not confirm the payment session. "
             "Please retry this same order."
         ) from error
+
+    session = stripe_to_dict(session)
 
     with transaction.atomic():
         order = (

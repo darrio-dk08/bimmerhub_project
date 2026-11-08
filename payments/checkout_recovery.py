@@ -10,6 +10,7 @@ from .payment_confirmation import confirm_order_payment
 from .payment_lifecycle import release_expired_reservation
 from .services import CheckoutError
 from .stripe_checkout import _validate_session
+from .stripe_data import stripe_to_dict
 
 
 def recover_checkout_session(*, session_id):
@@ -34,6 +35,7 @@ def recover_checkout_session(*, session_id):
 
     try:
         session = client.v1.checkout.sessions.retrieve(session_id)
+        session = stripe_to_dict(session)
     except stripe.StripeError as error:
         raise CheckoutError(
             "Stripe could not verify this session. "

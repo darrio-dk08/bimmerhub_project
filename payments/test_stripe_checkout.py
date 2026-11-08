@@ -16,6 +16,7 @@ from .models import Order
 from .reservations import reserve_pending_order
 from .services import CheckoutError
 from .stripe_checkout import get_checkout_url
+from .stripe_data import stripe_to_dict
 
 
 @override_settings(
