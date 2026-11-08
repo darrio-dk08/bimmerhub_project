@@ -84,8 +84,15 @@ class Order(models.Model):
         blank=True,
         editable=False,
     )
+
     stock_reserved = models.BooleanField(
         default=False,
+        editable=False,
+    )
+
+    stripe_checkout_request = models.JSONField(
+        default=dict,
+        blank=True,
         editable=False,
     )
 
