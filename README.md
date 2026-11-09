@@ -213,3 +213,19 @@ The new automated tests passed against the existing implementation.
 They provide regression coverage, rather than evidence of a test-first
 development cycle. These checks were local; production verification
 remains outstanding.
+
+### Declined Stripe payment and successful retry
+
+Verified locally on 9 November 2026 using Stripe sandbox cards:
+
+- A declined payment displayed a readable error.
+- The order remained awaiting payment and the basket retained its item.
+- No duplicate order or false payment confirmation appeared.
+- Retrying the same Checkout Session with a successful test card completed
+  payment with the correct total and original order reference.
+- The existing order changed to Paid without creating another order.
+- The unchanged basket was cleared after confirmation.
+- The checkout.session.completed webhook returned HTTP 200.
+
+This was a manual browser test. The automated suite remains at 218 tests.
+Production verification remains outstanding.
