@@ -177,3 +177,20 @@ Verified locally on Windows on 9 November 2026:
 - Order details displayed the correct products, quantities and totals.
 - Paid and cancelled orders did not offer payment controls.
 - Order-list and detail pages displayed correctly at desktop and mobile widths.
+
+### Read-only order administration
+
+Authorised staff can inspect orders in Django admin, search by order
+reference or customer email, and filter by payment status.
+
+Order details and saved product snapshots are read-only. Adding, editing
+and deleting orders through admin are blocked, including for superusers.
+Payment and stock changes remain handled by the payment services.
+
+Verified locally on Windows on 9 November 2026:
+
+- All 203 automated tests passed, including 12 order-admin tests.
+- Order search and status filters worked correctly.
+- Saved products, quantities, delivery, totals and status displayed correctly.
+- Order fields could not be edited.
+- Add order, Save and Delete controls were unavailable.
