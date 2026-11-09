@@ -194,3 +194,22 @@ Verified locally on Windows on 9 November 2026:
 - Saved products, quantities, delivery, totals and status displayed correctly.
 - Order fields could not be edited.
 - Add order, Save and Delete controls were unavailable.
+
+### Authentication and navigation audit
+
+Verified locally on Windows on 9 November 2026:
+
+- All 218 automated tests passed, including 15 authentication regression tests.
+- Registration created an account and logged the customer in.
+- Logged-in users were redirected away from login and signup forms.
+- Logout required confirmation.
+- Incorrect login details displayed a readable error; valid login succeeded.
+- Keyboard navigation had visible focus and usable controls.
+- The mobile menu opened and closed; Escape closed it and returned focus
+  to the menu button.
+- Authentication pages displayed correctly at desktop and mobile widths.
+
+The new automated tests passed against the existing implementation.
+They provide regression coverage, rather than evidence of a test-first
+development cycle. These checks were local; production verification
+remains outstanding.
