@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import payment_returns, views, webhooks
+from . import payment_actions, payment_returns, views, webhooks
 
 app_name = "payments"
 
@@ -19,6 +19,17 @@ urlpatterns = [
         "payment/<uuid:reference>/cancel/",
         payment_returns.payment_cancel,
         name="payment_cancel",
+    ),
+    path("checkout/pay/", payment_actions.payment_start, name="payment_start"),
+    path(
+        "payment/<uuid:reference>/retry/",
+        payment_actions.payment_retry,
+        name="payment_retry",
+    ),
+    path(
+        "payment/<uuid:reference>/cancel-confirm/",
+        payment_actions.payment_cancel_confirm,
+        name="payment_cancel_confirm",
     ),
     path("webhook/", webhooks.stripe_webhook, name="stripe_webhook"),
 ]

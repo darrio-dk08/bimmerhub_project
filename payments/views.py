@@ -8,6 +8,7 @@ from parts.models import Part
 
 from .basket import BASKET_SESSION_KEY, get_basket_summary
 from .forms import BasketQuantityForm, CheckoutForm
+from .checkout_flow import current_payment, mark_basket_changed, save_review
 
 
 @require_safe
@@ -44,6 +45,7 @@ def basket_add(request, pk):
 
     basket[key] = quantity
     request.session[BASKET_SESSION_KEY] = basket
+    mark_basket_changed(request)
 
     messages.success(request, f"{part.name} added to your basket.")
     return redirect("payments:basket_detail")
@@ -78,6 +80,7 @@ def basket_update(request, pk):
 
     basket[key] = quantity
     request.session[BASKET_SESSION_KEY] = basket
+    mark_basket_changed(request)
 
     messages.success(request, "Basket quantity updated.")
     return redirect("payments:basket_detail")
@@ -92,6 +95,7 @@ def basket_remove(request, pk):
     if key in basket:
         del basket[key]
         request.session[BASKET_SESSION_KEY] = basket
+        mark_basket_changed(request)
         messages.success(request, "Item removed from your basket.")
 
     return redirect("payments:basket_detail")
@@ -101,9 +105,11 @@ def basket_remove(request, pk):
 @require_http_methods(["GET", "POST"])
 def checkout(request):
     """Validate delivery details and display an order review."""
+    active = current_payment(request)
+    if active:
+        return redirect("payments:payment_success", reference=active.reference)
     summary = get_basket_summary(request)
     basket = request.session.get(BASKET_SESSION_KEY, {})
-
 
     existing_keys = {
         str(item["part"].pk)
@@ -116,6 +122,7 @@ def checkout(request):
             for key, quantity in basket.items()
             if key in existing_keys
         }
+        mark_basket_changed(request)
         messages.warning(
             request,
             "A product is no longer available and was removed. "
@@ -152,6 +159,9 @@ def checkout(request):
 
     if request.method == "POST" and form.is_valid():
         context["delivery_details"] = form.cleaned_data
+        context["checkout_token"] = save_review(
+            request, summary, form.cleaned_data,
+        )
         return render(
             request,
             "payments/checkout_review.html",

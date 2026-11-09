@@ -3,13 +3,16 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_GET
 
+from .checkout_flow import finish_basket
 from .models import Order
+from .payment_lifecycle import release_expired_reservation
 from .payment_confirmation import confirm_order_payment
 from .services import CheckoutError
 
 
 def _render_payment_status(request, order, *, returned_from_cancel=False):
     """Display saved payment status without assuming payment succeeded."""
+    finish_basket(request, order)
     return render(
         request,
         "payments/payment_status.html",
@@ -45,7 +48,8 @@ def payment_success(request, reference):
         and order.stripe_checkout_session_id
     ):
         try:
-            confirm_order_payment(order_id=order.pk)
+            if not confirm_order_payment(order_id=order.pk):
+                release_expired_reservation(order_id=order.pk)
         except CheckoutError:
             # A failed verification is not proof that payment failed.
             # Keep the existing order and let the customer check again.

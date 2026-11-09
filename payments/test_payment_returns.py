@@ -52,6 +52,12 @@ class PaymentReturnTests(TestCase):
         )
         self.confirm_payment = patcher.start()
         self.addCleanup(patcher.stop)
+        release_patcher = patch(
+            "payments.payment_returns.release_expired_reservation",
+            return_value=False,
+        )
+        self.release_stock = release_patcher.start()
+        self.addCleanup(release_patcher.stop)
 
     def test_login_is_required(self):
         self.client.logout()

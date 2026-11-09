@@ -40,7 +40,14 @@
             Phone: {{ delivery_details.phone }}
         </p>
 
-        <p>Online payment is not available yet.</p>
+        <p>Sandbox checkout: use Stripe test card details only.</p>
+        <form method="post" action="{% url 'payments:payment_start' %}">
+            {% csrf_token %}
+            <input type="hidden" name="checkout_token" value="{{ checkout_token }}">
+            <button class="basket-button" type="submit">
+                Continue to payment — &euro;{{ grand_total|floatformat:2 }}
+            </button>
+        </form>
 
         <details>
             <summary>Edit delivery details</summary>

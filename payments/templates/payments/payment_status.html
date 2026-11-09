@@ -36,6 +36,21 @@
         {% endif %}
     {% endif %}
 
+    {% if order.status == "pending" and order.stock_reserved %}
+        <form method="post" action="{% url 'payments:payment_retry' reference=order.reference %}">
+            {% csrf_token %}
+            <button class="auth-button" type="submit">Resume this payment</button>
+        </form>
+        {% if order.stripe_checkout_session_id %}
+        <form method="post" action="{% url 'payments:payment_cancel_confirm' reference=order.reference %}">
+            {% csrf_token %}
+            <button class="auth-button auth-button-secondary" type="submit">
+                Cancel this unpaid order
+            </button>
+        </form>
+        {% endif %}
+    {% endif %}
+
     <p>Order reference: {{ order.reference }}</p>
 
     <dl class="checkout-totals">
