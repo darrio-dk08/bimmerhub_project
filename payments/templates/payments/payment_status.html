@@ -51,6 +51,9 @@
         {% endif %}
     {% endif %}
 
+    <p>
+        <a href="{% url 'payments:order_detail' reference=order.reference %}">View saved order details</a>
+    </p>
     <p>Order reference: {{ order.reference }}</p>
 
     <dl class="checkout-totals">

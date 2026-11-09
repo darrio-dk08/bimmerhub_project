@@ -1582,3 +1582,85 @@ main p {
         transition: none;
     }
 }
+
+/* Customer order history and saved order details */
+.orders-page {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.order-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.order-card {
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border: 1px solid #dce3ec;
+    border-radius: 12px;
+    background: #fff;
+    min-width: 0;
+}
+
+.order-card-title {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+}
+
+.order-card-title,
+.order-reference,
+.order-contact {
+    overflow-wrap: anywhere;
+}
+
+.order-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 1rem;
+    margin: 0;
+}
+
+.order-facts dt {
+    color: #526174;
+    margin-bottom: 0.35rem;
+}
+
+.order-facts dd {
+    margin: 0;
+    font-weight: 700;
+}
+
+.order-status {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    font-weight: 700;
+    background: #e8edf3;
+    color: #25364c;
+}
+
+.order-status--paid {
+    color: #185c38;
+    background: #e4f4ea;
+}
+
+.order-status--pending {
+    color: #754600;
+    background: #fff1d4;
+}
+
+.order-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.order-pagination a {
+    padding: 0.7rem 1rem;
+    border: 1px solid #dce3ec;
+    border-radius: 6px;
+}

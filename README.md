@@ -163,3 +163,17 @@ Verified locally on 9 November 2026:
 - The cancelled order contained two headlights; current product stock
   was four. No pre-checkout stock count was recorded for this test,
   so the exact stock increase was not independently measured.
+
+  ### Customer order history
+
+Customers can view their own orders through My orders and open saved
+order details, including product prices, quantities, delivery and totals.
+Automated tests cover ownership restrictions and saved order details.
+
+Verified locally on Windows on 9 November 2026:
+
+- All 191 automated tests passed.
+- Previous orders appeared newest first.
+- Order details displayed the correct products, quantities and totals.
+- Paid and cancelled orders did not offer payment controls.
+- Order-list and detail pages displayed correctly at desktop and mobile widths.

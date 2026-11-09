@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}My orders | BimmerHub{% endblock %}
+
+{% block content %}
+<section class="orders-page" aria-labelledby="orders-heading">
+    <h1 id="orders-heading">My orders</h1>
+    <p>Your purchases and payment attempts, newest first.</p>
+
+    {% if page_obj.object_list %}
+    <ul class="order-list">
+        {% for order in page_obj %}
+        <li class="order-card">
+            <h2 class="order-card-title">
+                <a href="{% url 'payments:order_detail' reference=order.reference %}">
+                    Order {{ order.reference }}
+                </a>
+            </h2>
+            <dl class="order-facts">
+                <div>
+                    <dt>Created</dt>
+                    <dd><time datetime="{{ order.created_at|date:'c' }}">{{ order.created_at|date:"j M Y, H:i" }} UTC</time></dd>
+                </div>
+                <div>
+                    <dt>Payment status</dt>
+                    <dd><span class="order-status order-status--{{ order.status }}">{{ order.get_status_display }}</span></dd>
+                </div>
+                <div>
+                    <dt>Total including delivery</dt>
+                    <dd>{{ order.total|floatformat:2 }} {{ order.currency|upper }}</dd>
+                </div>
+            </dl>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if page_obj.has_other_pages %}
+    <nav class="order-pagination" aria-label="Order history pages">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" rel="prev">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" rel="next">Next</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+    {% else %}
+    <div class="order-card">
+        <h2>No orders yet</h2>
+        <p>Your orders will appear here when you continue to payment.</p>
+        <a class="basket-button" href="{% url 'parts:part_list' %}">Browse parts</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

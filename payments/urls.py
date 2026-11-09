@@ -1,10 +1,16 @@
 from django.urls import path
 
-from . import payment_actions, payment_returns, views, webhooks
+from . import order_views, payment_actions, payment_returns, views, webhooks
 
 app_name = "payments"
 
 urlpatterns = [
+    path("orders/", order_views.order_list, name="order_list"),
+    path(
+        "orders/<uuid:reference>/",
+        order_views.order_detail,
+        name="order_detail",
+    ),
     path("", views.basket_detail, name="basket_detail"),
     path("add/<int:pk>/", views.basket_add, name="basket_add"),
     path("update/<int:pk>/", views.basket_update, name="basket_update"),

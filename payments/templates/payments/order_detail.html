@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Order details | BimmerHub{% endblock %}
+
+{% block content %}
+<section class="orders-page" aria-labelledby="order-heading">
+    <p><a href="{% url 'payments:order_list' %}">&larr; My orders</a></p>
+    <h1 id="order-heading">Order details</h1>
+    <p class="order-reference">Reference: {{ order.reference }}</p>
+    <p>Created: <time datetime="{{ order.created_at|date:'c' }}">{{ order.created_at|date:"j M Y, H:i" }} UTC</time></p>
+    <p>Payment status: <span class="order-status order-status--{{ order.status }}">{{ order.get_status_display }}</span></p>
+
+    {% if order.status == "paid" %}
+        <p>Payment confirmed{% if order.paid_at %} on {{ order.paid_at|date:"j M Y, H:i" }} UTC{% endif %}.</p>
+    {% elif order.status == "cancelled" %}
+        <p>This order is closed. No further payment can be made for this order.</p>
+    {% else %}
+        <p>This order is awaiting payment confirmation. Check this attempt before starting another order.</p>
+        <p>
+            <a class="basket-button" href="{% url 'payments:payment_success' reference=order.reference %}">
+                Check or manage payment
+            </a>
+        </p>
+    {% endif %}
+
+    <div class="checkout-layout">
+        <section class="order-card" aria-labelledby="delivery-heading">
+            <h2 id="delivery-heading">Saved delivery details</h2>
+            <address class="checkout-address">
+                {{ order.full_name }}<br>
+                {{ order.address_line1 }}<br>
+                {% if order.address_line2 %}{{ order.address_line2 }}<br>{% endif %}
+                {{ order.town_or_city }}<br>
+                {% if order.county %}{{ order.county }}<br>{% endif %}
+                {% if order.postal_code %}{{ order.postal_code }}<br>{% endif %}
+                {% if order.country == "IE" %}Ireland{% else %}{{ order.country }}{% endif %}
+            </address>
+            <p class="order-contact">Email: {{ order.email }}<br>Phone: {{ order.phone }}</p>
+        </section>
+
+        <section class="checkout-summary" aria-labelledby="saved-items-heading">
+            <h2 id="saved-items-heading">Saved order summary</h2>
+            <p>Product details and prices recorded when this order was created.</p>
+            <ul class="checkout-items">
+                {% for item in order.items.all %}
+                <li>
+                    <div>
+                        <strong>{{ item.product_name }}</strong>
+                        <p>Part number: {{ item.part_number }}</p>
+                        <p>{{ item.quantity }} &times; {{ item.unit_price|floatformat:2 }} {{ order.currency|upper }}</p>
+                    </div>
+                    <strong>{{ item.subtotal|floatformat:2 }} {{ order.currency|upper }}</strong>
+                </li>
+                {% empty %}
+                <li>No saved items are available for this order.</li>
+                {% endfor %}
+            </ul>
+            <dl class="checkout-totals">
+                <div><dt>Items subtotal</dt><dd>{{ order.items_subtotal|floatformat:2 }} {{ order.currency|upper }}</dd></div>
+                <div><dt>Delivery</dt><dd>{{ order.delivery_cost|floatformat:2 }} {{ order.currency|upper }}</dd></div>
+                <div class="checkout-grand-total"><dt>Order total</dt><dd>{{ order.total|floatformat:2 }} {{ order.currency|upper }}</dd></div>
+            </dl>
+        </section>
+    </div>
+</section>
+{% endblock %}
