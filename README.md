@@ -86,10 +86,18 @@ Design choices visible in the implementation:
 - A payment return URL alone cannot establish payment success or cancellation.
   The interface distinguishes awaiting payment from confirmed payment.
 
-Local keyboard and responsive account-page checks are recorded below.
-A full contrast/accessibility audit, rendered HTML/CSS validation, JavaScript
-linting and browser-console review remain to be recorded. No Lighthouse score
-or accessibility conformance level is claimed without a measured result.
+HTML validation screenshots for selected pages, CSS validation,
+JavaScript linting, Python linting and homepage Lighthouse results
+are recorded in [Testing documentation](TESTING.md).
+
+The latest local Python check reported zero Flake8 issues, and all
+218 Django tests passed. Manual navigation checks confirmed that the
+mobile menu opens and closes, Escape returns focus to the menu button,
+desktop navigation appears at wider widths, and the browser console
+remains clear.
+
+A complete accessibility audit and validation of every authenticated
+page have not been completed.
 
 No original wireframes have been supplied for this documentation update.
 Any diagrams or screen plans added during resubmission should be labelled as
@@ -644,8 +652,9 @@ The manual records above reflect checks actually reported during development;
 they are not a claim that every page or production scenario has been tested.
 Before submission, record browser/device versions and actual results for:
 
-- W3C validation of rendered HTML and CSS validation, with fixes or explanations.
-- JavaScript lint results and browser-console checks across complete journeys.
+- Extend rendered HTML validation beyond the pages recorded in TESTING.md,
+  including authenticated customer pages.
+- Extend browser-console checks to any journeys not already exercised.
 - Measured contrast/accessibility and complete keyboard checks; additional device/browser coverage beyond the recorded manual checks.
 - All internal links, unavailable resources and useful error-page navigation.
 - Deployed decline/retry, full authentication and read-only admin permission checks.
@@ -692,8 +701,11 @@ established from the Git history. No history has been rewritten to imply one.
 - Technical references: [Django documentation](https://docs.djangoproject.com/en/5.2/),
   [django-allauth documentation](https://docs.allauth.org/),
   [Stripe test cards](https://docs.stripe.com/testing),
+  [ChatGpt Bug fix](https://chatgpt.com)
   [Stripe webhooks](https://docs.stripe.com/webhooks) and
   [Heroku Django configuration](https://devcenter.heroku.com/articles/django-app-configuration).
+  [Code Institute LMS channel](https://lms.codeinstitute.net/)
+  [Discord Code Institute channel](https://https://discord.com/)
 
 
 

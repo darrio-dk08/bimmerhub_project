@@ -51,7 +51,7 @@ the W3C CSS Validator with the CSS level 3 + SVG profile.
 
 Result: no errors found.
 
-Successful CSS validation for base.css![alt text](docs/testing/css-base-validation..png)
+![Successful CSS validation for base.css](docs/testing/css-base-validation.png)
 
 ## JavaScript validation
 
@@ -76,6 +76,10 @@ Result: no warnings reported.
 ![JSHint recheck showing no warnings](<docs/testing/Screenshot 2026-11-12 212457.png>)
 
 ## Python style validation
+
+The individual screenshots show earlier validation checkpoints.
+Some starter-file imports were subsequently removed during the complete
+Flake8 cleanup. The final project-wide result is recorded below.
 
 The following accounts files were checked using [PEP8 Online](https://pep8online.com/)
 with a maximum line length of 79 characters.
@@ -206,3 +210,11 @@ vary between runs.
 ### Desktop homepage
 
 ![Initial Lighthouse desktop homepage results: Performance 100, Accessibility 100, Best Practices 100, SEO 91](docs/testing/lighthouse-home-desktop-before.png)
+
+The initial homepage results were retained without further optimisation.
+Mobile Performance scored 88 and SEO scored 91 on both devices.
+Detailed performance and SEO recommendations were not investigated
+during this testing stage.
+
+An Accessibility score of 100 covers Lighthouse's automated checks;
+it does not establish complete accessibility.
