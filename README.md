@@ -445,6 +445,9 @@ because a request timed out.
 
 ## Testing
 
+Detailed test results and screenshots are available in
+[Testing documentation](TESTING.md).
+
 ### Automated tests
 
 The current suite contains **218 tests**, all passing locally on Windows
