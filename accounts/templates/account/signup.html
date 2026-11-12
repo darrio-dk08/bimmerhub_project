@@ -13,7 +13,26 @@
     <form method="post" action="{% url 'account_signup' %}" class="auth-form">
         {% csrf_token %}
 
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden.errors }}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+        <div class="auth-field">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+
+            {% if field.help_text %}
+            <div class="helptext" id="{{ field.auto_id }}_helptext">
+                {{ field.help_text|safe }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
 
         {% if redirect_field_value %}
         <input type="hidden"
