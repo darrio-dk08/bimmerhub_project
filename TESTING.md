@@ -206,4 +206,3 @@ vary between runs.
 ### Desktop homepage
 
 ![Initial Lighthouse desktop homepage results: Performance 100, Accessibility 100, Best Practices 100, SEO 91](docs/testing/lighthouse-home-desktop-before.png)
-
