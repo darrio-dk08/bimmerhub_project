@@ -625,10 +625,15 @@ The project author reported that all six checks passed on a phone:
 5. An empty required checkout address field produced a clear validation message.
 6. My orders and order details kept totals and buttons readable.
 
-Phone model, operating-system version and browser/version have not yet been
-recorded. These results describe the tested device only and are not a claim
-of coverage across all mobile browsers. The required-field check does not
-independently establish server-side validation; automated form tests cover that boundary.
+All six layout and interaction checks passed on:
+
+- Samsung Galaxy S21 Ultra using Google Chrome and Samsung Internet.
+- iPhone using Safari.
+- Mac using Safari.
+
+The exact iPhone and Mac models, operating-system versions and browser
+versions were not recorded. Results apply to these tested environments;
+they do not establish coverage across all devices or browsers.
 
 ### Validation and evidence still outstanding
 
