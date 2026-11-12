@@ -589,7 +589,7 @@ Verified locally on 9 November 2026 using Stripe sandbox cards:
 This was a manual browser test. The automated suite remains at 218 tests.
 Repeating this decline-and-retry scenario on Heroku remains outstanding.
 
-### Heroku deployment verification 
+### Heroku deployment verification
 
 Environment: Heroku `bimmerhub-dk08`, release `v16`, commit `a2f7492c`,
 PostgreSQL, Python 3.11.18 and Stripe sandbox. The tests below were performed
@@ -614,7 +614,7 @@ stock counts. Exact stock restoration is supported by the earlier local
 expiry test and automated tests, not claimed as a separately measured deployed result.
 These manual tests do not establish concurrent PostgreSQL behaviour under load.
 
-### Deployed mobile checks 
+### Deployed mobile checks
 
 The project author reported that all six checks passed on a phone:
 
