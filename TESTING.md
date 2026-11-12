@@ -181,3 +181,29 @@ was verified to preserve the original Python structure.
 
 All 218 Django automated tests passed after the changes.
 Git's whitespace check reported no errors.
+
+## Lighthouse testing
+
+The deployed homepage was audited using Chrome DevTools Lighthouse
+in Mobile and Desktop modes.
+
+### Initial homepage results
+
+| Category | Mobile | Desktop |
+| --- | ---: | ---: |
+| Performance | 88 | 100 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 91 | 91 |
+
+These scores record the initial audit results. Performance scores can
+vary between runs.
+
+### Mobile homepage
+
+![Initial Lighthouse mobile homepage results: Performance 88, Accessibility 100, Best Practices 100, SEO 91](docs/testing/lighthouse-home-mobile-before.png)
+
+### Desktop homepage
+
+![Initial Lighthouse desktop homepage results: Performance 100, Accessibility 100, Best Practices 100, SEO 91](docs/testing/lighthouse-home-desktop-before.png)
+
