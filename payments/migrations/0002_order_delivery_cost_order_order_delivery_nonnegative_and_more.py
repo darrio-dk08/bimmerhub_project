@@ -9,22 +9,35 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payments', '0001_initial'),
+        ("payments", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='delivery_cost',
-            field=models.DecimalField(decimal_places=2, default=Decimal('0.00'), max_digits=12, validators=[django.core.validators.MinValueValidator(Decimal('0.00'))]),
+            model_name="order",
+            name="delivery_cost",
+            field=models.DecimalField(
+                decimal_places=2,
+                default=Decimal("0.00"),
+                max_digits=12,
+                validators=[
+                    django.core.validators.MinValueValidator(Decimal("0.00"))
+                ],
+            ),
         ),
         migrations.AddConstraint(
-            model_name='order',
-            constraint=models.CheckConstraint(condition=models.Q(('delivery_cost__gte', 0)), name='order_delivery_nonnegative'),
+            model_name="order",
+            constraint=models.CheckConstraint(
+                condition=models.Q(("delivery_cost__gte", 0)),
+                name="order_delivery_nonnegative",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='order',
-            constraint=models.CheckConstraint(condition=models.Q(('total__gte', models.F('delivery_cost'))), name='order_total_covers_delivery'),
+            model_name="order",
+            constraint=models.CheckConstraint(
+                condition=models.Q(("total__gte", models.F("delivery_cost"))),
+                name="order_total_covers_delivery",
+            ),
         ),
     ]

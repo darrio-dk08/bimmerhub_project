@@ -30,7 +30,11 @@ class Part(models.Model):
 
     description = models.TextField()
 
-    part_number = models.CharField(max_length=50, unique=True, default="TEMP-PART")
+    part_number = models.CharField(
+        max_length=50,
+        unique=True,
+        default="TEMP-PART",
+    )
 
     compatible_model = models.CharField(
         max_length=100,

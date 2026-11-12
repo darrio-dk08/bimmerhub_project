@@ -13,62 +13,171 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('parts', '0002_alter_category_options_part_image_part_part_number_and_more'),
+        (
+            "parts",
+            "0002_alter_category_options_part_image_part_part_number_and_more",
+        ),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('reference', models.UUIDField(default=uuid.uuid4, editable=False, unique=True)),
-                ('full_name', models.CharField(max_length=150)),
-                ('email', models.EmailField(max_length=254)),
-                ('phone', models.CharField(max_length=30)),
-                ('address_line1', models.CharField(max_length=255)),
-                ('address_line2', models.CharField(blank=True, max_length=255)),
-                ('town_or_city', models.CharField(max_length=100)),
-                ('county', models.CharField(blank=True, max_length=100)),
-                ('postal_code', models.CharField(blank=True, max_length=20)),
-                ('country', models.CharField(max_length=2)),
-                ('currency', models.CharField(default='eur', editable=False, max_length=3)),
-                ('total', models.DecimalField(decimal_places=2, max_digits=12, validators=[django.core.validators.MinValueValidator(Decimal('0.00'))])),
-                ('status', models.CharField(choices=[('pending', 'Awaiting payment'), ('paid', 'Paid'), ('cancelled', 'Cancelled')], default='pending', max_length=20)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('paid_at', models.DateTimeField(blank=True, null=True)),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='orders', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "reference",
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, unique=True
+                    ),
+                ),
+                ("full_name", models.CharField(max_length=150)),
+                ("email", models.EmailField(max_length=254)),
+                ("phone", models.CharField(max_length=30)),
+                ("address_line1", models.CharField(max_length=255)),
+                (
+                    "address_line2",
+                    models.CharField(blank=True, max_length=255),
+                ),
+                ("town_or_city", models.CharField(max_length=100)),
+                ("county", models.CharField(blank=True, max_length=100)),
+                ("postal_code", models.CharField(blank=True, max_length=20)),
+                ("country", models.CharField(max_length=2)),
+                (
+                    "currency",
+                    models.CharField(
+                        default="eur", editable=False, max_length=3
+                    ),
+                ),
+                (
+                    "total",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=12,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                Decimal("0.00")
+                            )
+                        ],
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("pending", "Awaiting payment"),
+                            ("paid", "Paid"),
+                            ("cancelled", "Cancelled"),
+                        ],
+                        default="pending",
+                        max_length=20,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("paid_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="orders",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-created_at', '-pk'],
+                "ordering": ["-created_at", "-pk"],
             },
         ),
         migrations.CreateModel(
-            name='OrderItem',
+            name="OrderItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('product_name', models.CharField(max_length=200)),
-                ('part_number', models.CharField(max_length=50)),
-                ('unit_price', models.DecimalField(decimal_places=2, max_digits=8, validators=[django.core.validators.MinValueValidator(Decimal('0.00'))])),
-                ('quantity', models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(999)])),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='payments.order')),
-                ('part', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='order_items', to='parts.part')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("product_name", models.CharField(max_length=200)),
+                ("part_number", models.CharField(max_length=50)),
+                (
+                    "unit_price",
+                    models.DecimalField(
+                        decimal_places=2,
+                        max_digits=8,
+                        validators=[
+                            django.core.validators.MinValueValidator(
+                                Decimal("0.00")
+                            )
+                        ],
+                    ),
+                ),
+                (
+                    "quantity",
+                    models.PositiveIntegerField(
+                        validators=[
+                            django.core.validators.MinValueValidator(1),
+                            django.core.validators.MaxValueValidator(999),
+                        ]
+                    ),
+                ),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="items",
+                        to="payments.order",
+                    ),
+                ),
+                (
+                    "part",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="order_items",
+                        to="parts.part",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['pk'],
+                "ordering": ["pk"],
             },
         ),
         migrations.AddConstraint(
-            model_name='order',
-            constraint=models.CheckConstraint(condition=models.Q(('total__gte', 0)), name='order_total_nonnegative'),
+            model_name="order",
+            constraint=models.CheckConstraint(
+                condition=models.Q(("total__gte", 0)),
+                name="order_total_nonnegative",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='orderitem',
-            constraint=models.CheckConstraint(condition=models.Q(('unit_price__gte', 0)), name='order_item_price_nonnegative'),
+            model_name="orderitem",
+            constraint=models.CheckConstraint(
+                condition=models.Q(("unit_price__gte", 0)),
+                name="order_item_price_nonnegative",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='orderitem',
-            constraint=models.CheckConstraint(condition=models.Q(('quantity__gte', 1), ('quantity__lte', 999)), name='order_item_quantity_range'),
+            model_name="orderitem",
+            constraint=models.CheckConstraint(
+                condition=models.Q(
+                    ("quantity__gte", 1), ("quantity__lte", 999)
+                ),
+                name="order_item_quantity_range",
+            ),
         ),
     ]

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payments', '0004_order_checkout_token_order_stock_reserved'),
+        ("payments", "0004_order_checkout_token_order_stock_reserved"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='stripe_checkout_request',
+            model_name="order",
+            name="stripe_checkout_request",
             field=models.JSONField(blank=True, default=dict, editable=False),
         ),
     ]

@@ -6,18 +6,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payments', '0002_order_delivery_cost_order_order_delivery_nonnegative_and_more'),
+        (
+            "payments",
+            "0002_order_delivery_cost_order_"
+            "order_delivery_nonnegative_and_more",
+        ),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='stripe_checkout_session_id',
-            field=models.CharField(blank=True, editable=False, max_length=255, null=True, unique=True),
+            model_name="order",
+            name="stripe_checkout_session_id",
+            field=models.CharField(
+                blank=True,
+                editable=False,
+                max_length=255,
+                null=True,
+                unique=True,
+            ),
         ),
         migrations.AddField(
-            model_name='order',
-            name='stripe_payment_intent_id',
-            field=models.CharField(blank=True, editable=False, max_length=255, null=True, unique=True),
+            model_name="order",
+            name="stripe_payment_intent_id",
+            field=models.CharField(
+                blank=True,
+                editable=False,
+                max_length=255,
+                null=True,
+                unique=True,
+            ),
         ),
     ]

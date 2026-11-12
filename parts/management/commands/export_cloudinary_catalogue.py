@@ -83,7 +83,8 @@ class Command(BaseCommand):
             try:
                 with path.open("rb") as image_file:
                     saved_name = storage.save(
-                        f"bimmerhub/parts/product-{part.pk}{path.suffix.lower()}",
+                        f"bimmerhub/parts/product-{part.pk}"
+                        f"{path.suffix.lower()}",
                         File(image_file),
                     )
 

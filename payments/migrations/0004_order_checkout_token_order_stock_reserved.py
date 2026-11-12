@@ -6,18 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payments', '0003_order_stripe_checkout_session_id_and_more'),
+        ("payments", "0003_order_stripe_checkout_session_id_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='checkout_token',
-            field=models.UUIDField(blank=True, editable=False, null=True, unique=True),
+            model_name="order",
+            name="checkout_token",
+            field=models.UUIDField(
+                blank=True, editable=False, null=True, unique=True
+            ),
         ),
         migrations.AddField(
-            model_name='order',
-            name='stock_reserved',
+            model_name="order",
+            name="stock_reserved",
             field=models.BooleanField(default=False, editable=False),
         ),
     ]

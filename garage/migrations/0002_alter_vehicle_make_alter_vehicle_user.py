@@ -8,19 +8,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('garage', '0001_initial'),
+        ("garage", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='vehicle',
-            name='make',
-            field=models.CharField(default='BMW', max_length=50),
+            model_name="vehicle",
+            name="make",
+            field=models.CharField(default="BMW", max_length=50),
         ),
         migrations.AlterField(
-            model_name='vehicle',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='vehicles', to=settings.AUTH_USER_MODEL),
+            model_name="vehicle",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="vehicles",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

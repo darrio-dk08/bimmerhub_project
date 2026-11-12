@@ -1,15 +1,17 @@
+/* jshint esversion: 11, browser: true */
+
 const menuToggle = document.querySelector(".menu-toggle");
 const primaryNavigation = document.querySelector("#primary-navigation");
 
 if (menuToggle && primaryNavigation) {
     const mobileScreen = window.matchMedia("(max-width: 600px)");
 
-    function setMenuOpen(isOpen) {
+    const setMenuOpen = function (isOpen) {
         menuToggle.setAttribute("aria-expanded", String(isOpen));
         primaryNavigation.hidden = !isOpen;
-    }
+    };
 
-    function updateNavigation() {
+    const updateNavigation = function () {
         const isMobile = mobileScreen.matches;
         const focusWasInside = primaryNavigation.contains(
             document.activeElement
@@ -24,7 +26,7 @@ if (menuToggle && primaryNavigation) {
         } else if (!isMobile && toggleHadFocus) {
             primaryNavigation.querySelector("a")?.focus();
         }
-    }
+    };
 
     menuToggle.addEventListener("click", () => {
         const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
