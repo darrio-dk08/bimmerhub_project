@@ -161,4 +161,23 @@ Result: no issues reported in 16 lines.
 
 ### bimmerhub/settings.py
 
-Not submitted to the online checker. Local style validation is pending.
+Checked locally with Flake8 as part of the complete project scan.
+No issues reported.
+
+### Complete project Python validation
+
+Flake8 7.5.0 was run locally across all project
+Python folders and manage.py, including settings and migrations:
+
+```powershell
+python -m flake8 accounts bimmerhub core garage parts payments manage.py --isolated --max-line-length=79 --statistics --count
+```
+
+The initial scan reported 52 issues: 34 long lines, 5 unused imports,
+12 missing final newlines and 1 extra blank line at the end of a file.
+
+After corrections, the scan reported 0 issues. Migration formatting
+was verified to preserve the original Python structure.
+
+All 218 Django automated tests passed after the changes.
+Git's whitespace check reported no errors.
