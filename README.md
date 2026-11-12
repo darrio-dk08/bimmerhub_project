@@ -4,8 +4,9 @@ BimmerHub is a Django application for browsing BMW parts, managing a
 personal vehicle garage and ordering parts for delivery within Ireland.
 Delivery is charged at a fixed rate of €30 per order.
 
-The payment integration is currently being developed and tested using
-Stripe's sandbox.
+The application is deployed on Heroku and uses Stripe's sandbox only.
+Successful payment, resume and cancellation journeys were manually verified
+on the deployed site on 12 November 2026. No real money is taken.
 
 ## Purpose and audience
 
@@ -21,9 +22,11 @@ journey. It does not automatically guarantee product compatibility: customers
 must check the product's stated compatible model and part number.
 
 Source repository: [BimmerHub on GitHub](https://github.com/darrio-dk08/bimmerhub_project).
-Heroku app name: `bimmerhub-dk08`. The exact public URL and final deployed
-commit must be recorded after the current release is deployed and verified.
-An older deployment exists; it is not evidence that the latest features are live.
+Deployed site: [BimmerHub](https://bimmerhub-dk08-d54befa6cdf3.herokuapp.com/).
+Heroku app: `bimmerhub-dk08`. Release `v16` deployed commit `a2f7492c`
+on 12 November 2026 at 17:55:30 UTC. This matched local `main`,
+`origin/main` and `heroku/main` at verification; the working tree was clean.
+The deployment record identifies the tested release, not later documentation commits.
 
 ## Contents
 
@@ -48,11 +51,11 @@ resubmission preparation. They are not presented as a dated original plan.
 | --- | --- | --- |
 | As a visitor, I want to find suitable parts before creating an account. | Public catalogue, search by name/part number/model, category filter and detail pages. | Core and parts automated tests; complete production link audit outstanding. |
 | As a customer, I want to register and sign in securely. | Allauth forms, validation, anonymous-only login/signup and confirmed logout. | 15 authentication regression tests and local browser checks. |
-| As a customer, I want to maintain my vehicle details. | Create, list, edit and delete my own garage records. | Garage validation and ownership tests; repeat full CRUD on production. |
-| As a shopper, I want to control quantities and see the full cost. | Basket updates/removal, stock checks and fixed EUR 30 delivery. | Basket and checkout tests; local checkout checks. |
+| As a customer, I want to maintain my vehicle details. | Create, list, edit and delete my own garage records. | Garage validation and ownership tests; deployed CRUD and two-account checks passed on 12 November 2026. |
+| As a shopper, I want to control quantities and see the full cost. | Basket updates/removal, stock checks and fixed EUR 30 delivery. | Basket and checkout tests; deployed payment and mobile basket checks passed. |
 | As a customer, I want to review my address and price before paying. | Ireland-only form, review and server-side comparison of reviewed amounts. | Checkout form, view and connection tests. |
 | As a customer, I want clear payment results and a safe retry. | Stripe Checkout, verification, pending/paid/cancelled feedback, resume and cancellation. | Payment service tests plus successful, declined/retry and expiry browser/API checks. |
-| As a customer, I want to find previous orders. | Private order history and saved order details. | 16 order-page tests and local desktop/mobile checks. |
+| As a customer, I want to find previous orders. | Private order history and saved order details. | 16 order-page tests plus local and deployed order-history and ownership checks. |
 | As authorised staff, I want to inspect purchases without changing payment evidence. | Read-only order admin with search and filters. | 12 admin tests and local manual checks. |
 
 Visitors can browse and maintain a session basket. Authentication is required
@@ -102,7 +105,7 @@ links are not verified BimmerHub social accounts and need a final content review
 | HTML, CSS and custom JavaScript | Server-rendered responsive interface and mobile navigation |
 | django-allauth | Registration, username/password login and logout |
 | SQLite | Default local development database and current automated test database |
-| PostgreSQL via `DATABASE_URL` | Intended persistent production database connection |
+| PostgreSQL via `DATABASE_URL` | Persistent Heroku production database connection |
 | Stripe Python 15.1.0 / hosted Checkout | Sandbox payments and verified webhook processing |
 | WhiteNoise | Compressed, manifest-based static files |
 | Cloudinary | Persistent production product images |
@@ -248,11 +251,27 @@ use a real sandbox Checkout Session created by BimmerHub so references match.
 
 ## Deployment procedure
 
-**Status:** the earlier application was deployed to Heroku. The current
-checkout, history and admin updates have not yet been verified there.
-The following is the intended current-release procedure, not a completed
-production test record. Record the actual URL, release/commit and results
-when deployment is performed.
+**Status:** release `v16`, commit `a2f7492c`, was deployed on 12 November
+2026 at 17:55:30 UTC. The deployed payment, cancellation, garage and ownership
+checks are recorded under Testing. Read-only admin was tested locally;
+a repeat of its permission checks on Heroku remains outstanding.
+
+Database backup `b001` completed on 12 November 2026 at 17:37:36 UTC before
+the upgrade. All five `payments` migrations applied successfully and were
+listed as applied by `showmigrations payments`.
+
+The deployed Django shell confirmed `DEBUG=False`, a sandbox secret key,
+a webhook signing secret and the return origin
+`https://bimmerhub-dk08-d54befa6cdf3.herokuapp.com`. Secrets were not printed.
+The completed-payment webhook subsequently returned HTTP 200 at the deployed
+endpoint, providing a functional check beyond the secret-prefix checks.
+
+`check --deploy` reported one warning, `security.W004`, because
+`SECURE_HSTS_SECONDS` was not configured. This remains an outstanding
+security configuration review; a warning-free deployment check is not claimed.
+
+The following procedure documents deployment and future upgrades. The test
+record below distinguishes completed checks from outstanding validation.
 
 1. Select the existing `bimmerhub-dk08` app and verify its actual HTTPS domain
    in Heroku. Review hosting/database resources before changing paid plans.
@@ -364,7 +383,7 @@ configuration errors in the descriptions above.
 
 ## Current development status
 
-Implemented locally:
+Implemented and included in Heroku release `v16` (verification scope is recorded below):
 
 - Parts catalogue and product-detail pages.
 - Account registration, login and logout pages.
@@ -415,10 +434,12 @@ reconciliation/support. The application keeps its reservation rather than
 assuming a timeout means that Stripe created no session. Automatic scheduled
 reconciliation of abandoned attempts has not been implemented.
 
-These local payment changes have not yet been verified on Heroku.
-Remaining work includes production verification, a fresh-clone setup check,
-complete accessibility/validation and link checks, asset attribution, and
-a final review against the assessment criteria. Scheduled recovery of old
+Successful payment, resume/cancellation, garage CRUD, two-account ownership
+and the listed mobile checks were verified on Heroku.
+Remaining work includes deployed decline/retry and admin permission checks,
+the HSTS configuration review, a fresh-clone setup check, complete
+accessibility/validation and link checks, asset attribution, and a final
+review against the assessment criteria. Scheduled recovery of old
 unknown attempts remains unimplemented; do not release reserved stock merely
 because a request timed out.
 
@@ -427,7 +448,7 @@ because a request timed out.
 ### Automated tests
 
 The current suite contains **218 tests**, all passing locally on Windows
-with Python 3.11.3 on 9 November 2026. The same suite also passed with
+with Python 3.11.3. The same suite also passed with
 Python 3.12, Django 5.2.14 and Stripe Python 15.1.0.
 Historical counts below identify earlier development checkpoints.
 
@@ -548,8 +569,9 @@ Verified locally on Windows on 9 November 2026:
 
 The new automated tests passed against the existing implementation.
 They provide regression coverage, rather than evidence of a test-first
-development cycle. These checks were local; production verification
-remains outstanding.
+development cycle. These detailed authentication checks were local.
+Deployed customer journeys and second-account registration were exercised
+in the checks below; the full authentication matrix has not been repeated there.
 
 ### Declined Stripe payment and successful retry
 
@@ -565,7 +587,48 @@ Verified locally on 9 November 2026 using Stripe sandbox cards:
 - The checkout.session.completed webhook returned HTTP 200.
 
 This was a manual browser test. The automated suite remains at 218 tests.
-Production verification remains outstanding.
+Repeating this decline-and-retry scenario on Heroku remains outstanding.
+
+### Heroku deployment verification 
+
+Environment: Heroku `bimmerhub-dk08`, release `v16`, commit `a2f7492c`,
+PostgreSQL, Python 3.11.18 and Stripe sandbox. The tests below were performed
+manually by the project author. Stripe delivery screenshots corroborated the
+successful payment event and its HTTP 200 response from the Heroku endpoint.
+Other outcomes were reported during the guided checks.
+
+| Scenario | Observed result |
+| --- | --- |
+| Successful sandbox checkout | Payment confirmed appeared with the correct total; the basket cleared and My orders showed Paid. |
+| Completed-payment webhook | `checkout.session.completed` reached `/basket/webhook/` with HTTP 200 at 18:07:19 UTC on 12 November 2026. |
+| Return without payment | The order remained awaiting payment. |
+| Resume payment | Stripe reopened with the same product, quantity and total. |
+| Explicit cancellation | The order became Cancelled and basket items remained. |
+| Expiry webhook | `checkout.session.expired` delivery to the Heroku endpoint returned HTTP 200. |
+| Garage CRUD | A temporary vehicle could be created, viewed, edited and deleted; cancelling deletion preserved it. |
+| Cross-account access | A second account received Not Found for the first account's vehicle-edit and paid-order detail URLs. |
+| Private lists | The second account's Garage and My orders excluded the first account's records. |
+
+The deployed cancellation test did not independently record before-and-after
+stock counts. Exact stock restoration is supported by the earlier local
+expiry test and automated tests, not claimed as a separately measured deployed result.
+These manual tests do not establish concurrent PostgreSQL behaviour under load.
+
+### Deployed mobile checks 
+
+The project author reported that all six checks passed on a phone:
+
+1. Homepage images and text fitted without sideways scrolling.
+2. Navigation opened and closed, and its links worked.
+3. The parts catalogue and a product-detail page opened.
+4. An item could be added to the basket and its quantity changed.
+5. An empty required checkout address field produced a clear validation message.
+6. My orders and order details kept totals and buttons readable.
+
+Phone model, operating-system version and browser/version have not yet been
+recorded. These results describe the tested device only and are not a claim
+of coverage across all mobile browsers. The required-field check does not
+independently establish server-side validation; automated form tests cover that boundary.
 
 ### Validation and evidence still outstanding
 
@@ -575,11 +638,12 @@ Before submission, record browser/device versions and actual results for:
 
 - W3C validation of rendered HTML and CSS validation, with fixes or explanations.
 - JavaScript lint results and browser-console checks across complete journeys.
-- Contrast, keyboard and responsive checks beyond the account/order pages.
+- Measured contrast/accessibility and complete keyboard checks; additional device/browser coverage beyond the recorded manual checks.
 - All internal links, unavailable resources and useful error-page navigation.
-- Full garage CRUD on the deployed database and two-account ownership checks.
-- Deployed Stripe webhook, success, decline/retry and expiry/cancellation flows.
-- Final production settings, release commit, media/static files and fresh setup.
+- Deployed decline/retry, full authentication and read-only admin permission checks.
+- HSTS configuration review and a repeat deployment check after any security changes.
+- Complete media/static resource audit and a fresh-clone setup rehearsal.
+- Phone model, operating-system and browser versions for reproducible mobile evidence.
 
 ### Test procedure and development history
 
@@ -624,11 +688,6 @@ established from the Git history. No history has been rewritten to imply one.
   [Heroku Django configuration](https://devcenter.heroku.com/articles/django-app-configuration).
 
 
-**Attribution review outstanding:** record the actual source and licence or
-permission for the homepage photograph, catalogue images and social-icon paths.
-Verify the origin of any tutorial-derived or externally adapted code and add
-specific source comments where required. Do not describe assets as original or
-licensed without evidence. No asset ownership or BMW affiliation is claimed.
 
 This documentation describes the current application and verified progress.
 It does not claim that remaining production, attribution or assessment checks
@@ -636,7 +695,7 @@ have already been completed.
 
 ### Image credits
 
-- Homepage photograph: taken by the project author. 
+- Homepage photograph: taken by the project author.
 - Product images: sourced from [Pexels](https://www.pexels.com/),
   [Unsplash](https://unsplash.com/) and [Pixabay](https://pixabay.com/).
   Individual image-page links and photographer details were not retained.
